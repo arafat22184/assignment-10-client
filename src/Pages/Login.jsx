@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Login = () => {
   return (
-    <div className="flex items-center justify-center px-4 mt-6">
+    <div className="flex items-center justify-center px-4 my-8">
       <div className="w-full max-w-md bg-gray-800 p-8 rounded-xl shadow-lg">
         <h2 className="text-3xl font-bold mb-6 text-center text-white">
           Login to HobbyHub
