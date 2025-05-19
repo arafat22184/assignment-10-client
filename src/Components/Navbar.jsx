@@ -77,7 +77,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar max-w-11/12 mx-auto ">
+    <nav className="navbar max-w-11/12 mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -106,7 +106,7 @@ const Navbar = () => {
         </div>
         <Link className="flex items-center gap-5" to={"/"}>
           <img
-            className="w-24"
+            className="w-20"
             src={
               "https://i.ibb.co.com/YTLkKY8d/Chat-GPT-Image-May-20-2025-01-59-22-AM.png"
             }
@@ -119,7 +119,7 @@ const Navbar = () => {
         <ul className="menu space-x-8 menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end hidden lg:flex space-x-6">{loginLinks}</div>
-    </div>
+    </nav>
   );
 };
 
