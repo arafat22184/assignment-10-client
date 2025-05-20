@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 const Banner = () => {
   return (
-    <div className="w-full">
+    <div className="w-full pt-12 px-4">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -18,7 +18,7 @@ const Banner = () => {
         className="rounded-2xl overflow-hidden"
       >
         <SwiperSlide>
-          <div className="bg-[url('https://i.ibb.co.com/JW61PbKz/DSC-0061-1.jpg')] bg-cover bg-center h-[70vh] flex items-center justify-center text-white px-4">
+          <div className=" bg-[url('https://i.ibb.co.com/JW61PbKz/DSC-0061-1.jpg')] bg-cover bg-center h-[70vh] flex items-center justify-center text-white px-4">
             <div className="bg-black/60 p-6 rounded-xl max-w-2xl text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-3">
                 Discover Your Passion

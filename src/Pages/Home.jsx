@@ -7,7 +7,7 @@ import Groups from "../Components/Groups";
 
 const Home = () => {
   return (
-    <div className="mt-10">
+    <div>
       <Banner></Banner>
       <BannerGroups></BannerGroups>
       <Groups></Groups>

@@ -19,7 +19,7 @@ const Groups = () => {
   }, [allGroups]);
 
   return (
-    <div className="min-w-full px-4 py-12 my-12 rounded-2xl bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <div className="min-w-full px-4 py-12 my-12 rounded-2xl text-gray-900  dark:text-white transition-colors duration-300">
       <h1 className="text-4xl font-bold text-center mb-10">
         Explore All Groups
       </h1>

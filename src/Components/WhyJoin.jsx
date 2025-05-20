@@ -2,7 +2,7 @@ import React from "react";
 
 const WhyJoin = () => {
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-16  dark:bg-gray-900 transition-colors duration-300">
+    <section className="py-16 rounded-2xl mb-12 px-4 md:px-8 lg:px-16 transition-colors duration-300">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
           Why Join HobbyHub?
