@@ -1,11 +1,40 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const CreateGroup = () => {
+  const { user } = use(AuthContext);
+
   const handleCreateGroup = (e) => {
     e.preventDefault();
-    const select = e.target.select.value;
-    const date = e.target.date.value;
-    console.log(select, date);
+    const form = e.target;
+    const formData = new FormData(form);
+    const formAllValues = Object.fromEntries(formData.entries());
+    const uid = user.uid;
+
+    const newGroup = { ...formAllValues, uid };
+
+    fetch("http://localhost:3000/userGroups", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newGroup),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        toast.success("Group Created Successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        form.reset();
+      });
   };
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
@@ -118,7 +147,7 @@ const CreateGroup = () => {
               name="name"
               type="text"
               readOnly
-              value="John Doe"
+              defaultValue={user?.displayName}
               className="w-full px-4 py-2 rounded-md bg-gray-600 text-gray-300 border border-gray-500"
             />
           </div>
@@ -128,7 +157,7 @@ const CreateGroup = () => {
               name="email"
               type="email"
               readOnly
-              value="john@example.com"
+              defaultValue={user?.email}
               className="w-full px-4 py-2 rounded-md bg-gray-600 text-gray-300 border border-gray-500"
             />
           </div>
