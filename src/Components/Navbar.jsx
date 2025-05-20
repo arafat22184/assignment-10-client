@@ -1,7 +1,41 @@
-import React from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
+import { toast } from "react-toastify";
+import { MdLogout } from "react-icons/md";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
+  const { user, logOut } = use(AuthContext);
+
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Sign out Successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      })
+      .catch(() => {
+        toast.error("Oops! Something went wrong. Please try again later.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      });
+  };
+
   const links = (
     <>
       <NavLink
@@ -76,6 +110,32 @@ const Navbar = () => {
     </>
   );
 
+  const logOutBtn = (
+    <>
+      <img
+        className="w-14 h-14 rounded-full border-blue-500 border-4 "
+        src={user?.photoURL}
+        alt="user photo"
+        data-tooltip-id="tooltip-anchor-hide"
+        data-tooltip-content={user?.email}
+        data-tooltip-delay-hide={1000}
+      />
+      <Tooltip
+        style={{ backgroundColor: "#7869BC", color: "#ffff" }}
+        id="tooltip-anchor-hide"
+      />
+      <button
+        onClick={handleSignOut}
+        className=" text-[18px] text-red-500 py-3 px-7 font-semibold border rounded cursor-pointer hover:bg-red-500 border-red-500 hover:text-white flex items-center gap-2"
+      >
+        Logout{" "}
+        <span className="text-2xl">
+          <MdLogout />
+        </span>
+      </button>
+    </>
+  );
+
   return (
     <nav className="navbar max-w-11/12 mx-auto">
       <div className="navbar-start">
@@ -102,6 +162,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-3"
           >
             {links}
+            {user ? logOutBtn : loginLinks}
           </ul>
         </div>
         <Link className="flex items-center gap-5" to={"/"}>
@@ -118,7 +179,9 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu space-x-8 menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end hidden lg:flex space-x-6">{loginLinks}</div>
+      <div className="navbar-end hidden lg:flex space-x-6">
+        {user ? logOutBtn : loginLinks}
+      </div>
     </nav>
   );
 };

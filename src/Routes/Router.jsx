@@ -6,6 +6,7 @@ import Register from "../Pages/Register";
 import Groups from "../Pages/Groups";
 import CreateGroup from "../Pages/CreateGroup";
 import MyGroups from "../Pages/MyGroups";
+import PrivateRoute from "../Provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +23,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/createGroup",
-        Component: CreateGroup,
+        element: (
+          <PrivateRoute>
+            <CreateGroup></CreateGroup>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myGroups",
-        Component: MyGroups,
+        element: (
+          <PrivateRoute>
+            <MyGroups></MyGroups>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
