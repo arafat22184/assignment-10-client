@@ -1,9 +1,18 @@
 import React from "react";
 
 const CreateGroup = () => {
+  const handleCreateGroup = (e) => {
+    e.preventDefault();
+    const select = e.target.select.value;
+    const date = e.target.date.value;
+    console.log(select, date);
+  };
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
-      <form className="space-y-6 bg-gray-800 p-8 rounded-xl shadow-lg text-white">
+      <form
+        onSubmit={handleCreateGroup}
+        className="space-y-6 bg-gray-800 p-8 rounded-xl shadow-lg text-white"
+      >
         {/* Header */}
         <h2 className="text-4xl font-bold text-center mb-8 text-white">
           Create a New Hobby Group
@@ -14,6 +23,7 @@ const CreateGroup = () => {
           <label className="block mb-1 font-medium">Group Name</label>
           <input
             type="text"
+            name="groupName"
             required
             className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Enter group name"
@@ -24,6 +34,7 @@ const CreateGroup = () => {
         <div>
           <label className="block mb-1 font-medium">Hobby Category</label>
           <select
+            name="hobbyCategory"
             required
             className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
           >
@@ -43,6 +54,7 @@ const CreateGroup = () => {
         <div>
           <label className="block mb-1 font-medium">Description</label>
           <textarea
+            name="description"
             rows="4"
             required
             className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -54,6 +66,7 @@ const CreateGroup = () => {
         <div>
           <label className="block mb-1 font-medium">Meeting Location</label>
           <input
+            name="meetingLocation"
             type="text"
             required
             className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -65,6 +78,7 @@ const CreateGroup = () => {
         <div>
           <label className="block mb-1 font-medium">Max Members</label>
           <input
+            name="maxMembers"
             type="number"
             min={1}
             required
@@ -78,6 +92,7 @@ const CreateGroup = () => {
           <label className="block mb-1 font-medium">Start Date</label>
           <input
             type="date"
+            name="startDate"
             required
             className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
           />
@@ -87,6 +102,7 @@ const CreateGroup = () => {
         <div>
           <label className="block mb-1 font-medium">Image URL</label>
           <input
+            name="imageUrl"
             type="url"
             required
             className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -99,6 +115,7 @@ const CreateGroup = () => {
           <div>
             <label className="block mb-1 font-medium">Your Name</label>
             <input
+              name="name"
               type="text"
               readOnly
               value="John Doe"
@@ -108,6 +125,7 @@ const CreateGroup = () => {
           <div>
             <label className="block mb-1 font-medium">Your Email</label>
             <input
+              name="email"
               type="email"
               readOnly
               value="john@example.com"

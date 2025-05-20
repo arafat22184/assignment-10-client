@@ -3,10 +3,11 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
-import Groups from "../Pages/Groups";
 import CreateGroup from "../Pages/CreateGroup";
 import MyGroups from "../Pages/MyGroups";
 import PrivateRoute from "../Provider/PrivateRoute";
+import LoadingSpinner from "../Components/LoadingSpinner";
+import AllGroups from "../Pages/AllGroups";
 
 const router = createBrowserRouter([
   {
@@ -16,10 +17,14 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: () => fetch("http://localhost:3000/allGroups"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/groups",
-        Component: Groups,
+        Component: AllGroups,
+        loader: () => fetch("http://localhost:3000/allGroups"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/createGroup",
