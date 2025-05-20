@@ -8,6 +8,7 @@ import MyGroups from "../Pages/MyGroups";
 import PrivateRoute from "../Provider/PrivateRoute";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import AllGroups from "../Pages/AllGroups";
+import GroupDetails from "../Pages/GroupDetails";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,17 @@ const router = createBrowserRouter([
             <MyGroups></MyGroups>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/groups/:id",
+        element: (
+          <PrivateRoute>
+            <GroupDetails></GroupDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/allGroups/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/login",
