@@ -18,6 +18,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [location, setLocation] = useState("");
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -63,6 +64,8 @@ const AuthProvider = ({ children }) => {
     setLoading,
     googleLogIn,
     updateUser,
+    location,
+    setLocation,
   };
   return <AuthContext value={authData}>{children}</AuthContext>;
 };
