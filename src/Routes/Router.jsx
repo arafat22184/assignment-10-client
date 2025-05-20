@@ -3,6 +3,8 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import Groups from "../Pages/Groups";
+import CreateGroup from "../Pages/CreateGroup";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,14 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "/groups",
+        Component: Groups,
+      },
+      {
+        path: "/createGroup",
+        Component: CreateGroup,
       },
       {
         path: "/login",
