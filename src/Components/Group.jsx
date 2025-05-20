@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { format, parseISO } from "date-fns";
+import { FaUserFriends, FaCalendarAlt } from "react-icons/fa";
 
 const Group = ({ group }) => {
   const formattedDate = format(parseISO(group.startDate), "MMMM d, yyyy");
@@ -22,24 +23,19 @@ const Group = ({ group }) => {
         </h2>
 
         {/* Hobby Category */}
-        <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-1">
+        <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-2">
           {group.hobbyCategory}
         </p>
 
-        {/* Description */}
-        <p className="text-gray-700 dark:text-gray-300 mb-4 flex-grow">
-          {group.description}
-        </p>
-
-        {/* Meeting Location */}
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-          📍 {group.meetingLocation}
-        </p>
-
-        {/* Members & Date */}
+        {/* Members & Start Date */}
         <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
-          <span>👥 {group.maxMembers} Members</span>
-          <span>📅 {formattedDate}</span>
+          <span className="flex items-center gap-1">
+            <FaUserFriends className="text-indigo-500" /> {group.maxMembers}{" "}
+            Members
+          </span>
+          <span className="flex items-center gap-1">
+            <FaCalendarAlt className="text-indigo-500" /> {formattedDate}
+          </span>
         </div>
 
         {/* See More Button */}
