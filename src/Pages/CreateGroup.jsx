@@ -101,7 +101,7 @@ const CreateGroup = () => {
             <input
               type="text"
               readOnly
-              value="John Doe" // Replace with dynamic user name
+              value="John Doe"
               className="w-full px-4 py-2 rounded-md bg-gray-600 text-gray-300 border border-gray-500"
             />
           </div>
@@ -110,7 +110,7 @@ const CreateGroup = () => {
             <input
               type="email"
               readOnly
-              value="john@example.com" // Replace with dynamic user email
+              value="john@example.com"
               className="w-full px-4 py-2 rounded-md bg-gray-600 text-gray-300 border border-gray-500"
             />
           </div>
