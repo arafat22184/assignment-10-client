@@ -10,6 +10,7 @@ import LoadingSpinner from "../Components/LoadingSpinner";
 import AllGroups from "../Pages/AllGroups";
 import GroupDetails from "../Pages/GroupDetails";
 import UpdateGroup from "../Pages/UpdateGroup";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,7 @@ const router = createBrowserRouter([
         Component: Register,
       },
     ],
+    errorElement: <ErrorPage></ErrorPage>,
   },
 ]);
 
