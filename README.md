@@ -19,7 +19,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 🌐 **Live Demo:** https://hobbyhub-yourdomain.web.app
 
-![HobbyHub Banner](https://i.ibb.co/q3QjWrpd/image.png)
+![HobbyHub Banner](./src/assets/2025-05-22_03-16.png)
 
 ## 🚀 Key Features
 
