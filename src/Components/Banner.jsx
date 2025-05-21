@@ -18,7 +18,7 @@ const Banner = () => {
       >
         <SwiperSlide>
           <div className=" bg-[url('https://i.ibb.co.com/JW61PbKz/DSC-0061-1.jpg')] bg-cover bg-center h-[70vh] flex items-center justify-center text-white px-4">
-            <div className="bg-black/60 p-6 rounded-xl max-w-2xl text-center">
+            <div className="bg-black/60 p-6 rounded-xl max-w-3xl text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-3">
                 Discover Your Passion
               </h2>
@@ -32,7 +32,7 @@ const Banner = () => {
 
         <SwiperSlide>
           <div className="bg-[url('https://i.ibb.co.com/20X8fgZ2/united.jpg')] bg-cover bg-center h-[70vh] flex items-center justify-center text-white px-4">
-            <div className="bg-black/60 p-6 rounded-xl max-w-2xl text-center">
+            <div className="bg-black/60 p-6 rounded-xl max-w-3xl text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-3">
                 Create Your Own Group
               </h2>
@@ -45,7 +45,7 @@ const Banner = () => {
 
         <SwiperSlide>
           <div className="bg-[url('https://i.ibb.co.com/NdWLt5B7/mountain-Man.jpg')] bg-cover bg-center h-[70vh] flex items-center justify-center text-white px-4">
-            <div className="bg-black/60 p-6 rounded-xl max-w-2xl text-center">
+            <div className="bg-black/60 p-6 rounded-xl max-w-3xl text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-3">
                 Explore Diverse Hobbies
               </h2>
@@ -59,7 +59,7 @@ const Banner = () => {
 
         <SwiperSlide>
           <div className="bg-[url('https://i.ibb.co.com/bMzmKNTf/group.jpg')] bg-cover bg-center h-[70vh] flex items-center justify-center text-white px-4">
-            <div className="bg-black/60 p-6 rounded-xl max-w-2xl text-center">
+            <div className="bg-black/60 p-6 rounded-xl max-w-3xl text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-3">
                 Connect. Create. Celebrate.
               </h2>
