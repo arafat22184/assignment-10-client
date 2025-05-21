@@ -1,8 +1,9 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
-const UserGroup = ({ group, i }) => {
+const UserGroup = ({ group, i, setUserGroups, userGroups }) => {
   const {
     _id,
     groupName,
@@ -11,6 +12,40 @@ const UserGroup = ({ group, i }) => {
     maxMembers,
     startDate,
   } = group;
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/userGroups/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Coffee has been deleted.",
+                icon: "success",
+              });
+
+              // Remove the group from the state
+              const remainingGroups = userGroups.filter(
+                (group) => group._id !== _id
+              );
+              setUserGroups(remainingGroups);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <>
@@ -29,7 +64,10 @@ const UserGroup = ({ group, i }) => {
             </button>
           </Link>
 
-          <button className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md transition duration-300 cursor-pointer">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md transition duration-300 cursor-pointer"
+          >
             <FaTrash />
             Delete
           </button>

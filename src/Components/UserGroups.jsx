@@ -1,7 +1,7 @@
 import React from "react";
 import UserGroup from "./UserGroup";
 
-const UserGroups = ({ userGroups }) => {
+const UserGroups = ({ userGroups, setUserGroups }) => {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left border-collapse text-sm">
@@ -18,7 +18,13 @@ const UserGroups = ({ userGroups }) => {
         </thead>
         <tbody className="bg-gray-800 text-white">
           {userGroups.map((group, i) => (
-            <UserGroup key={group._id} i={i} group={group}></UserGroup>
+            <UserGroup
+              key={group._id}
+              i={i}
+              setUserGroups={setUserGroups}
+              userGroups={userGroups}
+              group={group}
+            ></UserGroup>
           ))}
         </tbody>
       </table>

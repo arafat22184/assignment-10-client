@@ -1,4 +1,4 @@
-import { use } from "react";
+import { use, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import UserGroups from "../Components/UserGroups";
@@ -6,9 +6,10 @@ import UserGroups from "../Components/UserGroups";
 const MyGroups = () => {
   const initialUserGroups = useLoaderData();
   const { user } = use(AuthContext);
-  const userGroups = initialUserGroups.filter(
+  const filterUserGroups = initialUserGroups.filter(
     (group) => group.uid === user.uid
   );
+  const [userGroups, setUserGroups] = useState(filterUserGroups);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -19,7 +20,10 @@ const MyGroups = () => {
           You haven’t created any groups yet.
         </p>
       ) : (
-        <UserGroups userGroups={userGroups}></UserGroups>
+        <UserGroups
+          userGroups={userGroups}
+          setUserGroups={setUserGroups}
+        ></UserGroups>
       )}
     </div>
   );
