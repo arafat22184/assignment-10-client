@@ -1,9 +1,21 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
+import {
+  MdGroups,
+  MdCategory,
+  MdDescription,
+  MdLocationPin,
+  MdPeople,
+  MdDateRange,
+  MdImage,
+  MdPerson,
+  MdEmail,
+  MdUpdate,
+} from "react-icons/md";
 
 const UpdateGroup = () => {
-  const { user } = use(AuthContext);
+  const { user, theme } = useContext(AuthContext);
   const {
     description,
     email,
@@ -19,13 +31,11 @@ const UpdateGroup = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const formAllValues = Object.fromEntries(formData.entries());
     const uid = user.uid;
     const updateGroup = { ...formAllValues, uid };
-    console.log(updateGroup);
 
     fetch(`http://localhost:3000/userGroups/${_id}`, {
       method: "PUT",
@@ -36,42 +46,60 @@ const UpdateGroup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log("Updated successfully:", data);
       });
   };
+
+  const cardBg =
+    theme === "light"
+      ? "bg-white text-gray-800 border border-gray-200"
+      : "bg-gray-800 text-white";
+  const inputBg =
+    theme === "light"
+      ? "bg-gray-100 border-gray-300"
+      : "bg-gray-700 border-gray-600";
+  const readOnlyBg =
+    theme === "light"
+      ? "bg-gray-200 text-gray-600 border-gray-300"
+      : "bg-gray-600 text-gray-300 border-gray-500";
+
+  const labelStyle = "flex items-center gap-2 mb-1 font-medium";
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
       <form
         onSubmit={handleUpdate}
-        className="space-y-6 bg-gray-800 p-8 rounded-xl shadow-lg text-white"
+        className={`space-y-6 p-8 rounded-xl shadow-lg  ${cardBg}`}
       >
-        {/* Header */}
-        <h2 className="text-4xl font-bold text-center mb-8 text-white">
-          Update Group
+        <h2 className="text-4xl font-bold text-center mb-8 flex items-center justify-center gap-2">
+          <MdUpdate className="text-indigo-500" /> Update Group
         </h2>
 
         {/* Group Name */}
         <div>
-          <label className="block mb-1 font-medium">Group Name</label>
+          <label className={labelStyle}>
+            <MdGroups className="text-xl" /> Group Name
+          </label>
           <input
             type="text"
             name="groupName"
             defaultValue={groupName}
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
             placeholder="Enter group name"
           />
         </div>
 
         {/* Hobby Category */}
         <div>
-          <label className="block mb-1 font-medium">Hobby Category</label>
+          <label className={labelStyle}>
+            <MdCategory className="text-xl" /> Hobby Category
+          </label>
           <select
             name="hobbyCategory"
             defaultValue={hobbyCategory}
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
           >
             <option value="">Select Category</option>
             <option>Drawing & Painting</option>
@@ -87,65 +115,75 @@ const UpdateGroup = () => {
 
         {/* Description */}
         <div>
-          <label className="block mb-1 font-medium">Description</label>
+          <label className={labelStyle}>
+            <MdDescription className="text-xl" /> Description
+          </label>
           <textarea
             name="description"
             defaultValue={description}
             rows="4"
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
             placeholder="Write a short description about the group"
           ></textarea>
         </div>
 
         {/* Meeting Location */}
         <div>
-          <label className="block mb-1 font-medium">Meeting Location</label>
+          <label className={labelStyle}>
+            <MdLocationPin className="text-xl" /> Meeting Location
+          </label>
           <input
             name="meetingLocation"
             defaultValue={meetingLocation}
             type="text"
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
             placeholder="e.g. Dhaka, Bangladesh"
           />
         </div>
 
         {/* Max Members */}
         <div>
-          <label className="block mb-1 font-medium">Max Members</label>
+          <label className={labelStyle}>
+            <MdPeople className="text-xl" /> Max Members
+          </label>
           <input
             name="maxMembers"
             defaultValue={maxMembers}
             type="number"
             min={1}
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
             placeholder="e.g. 10"
           />
         </div>
 
         {/* Start Date */}
         <div>
-          <label className="block mb-1 font-medium">Start Date</label>
+          <label className={labelStyle}>
+            <MdDateRange className="text-xl" /> Start Date
+          </label>
           <input
             type="date"
             name="startDate"
             defaultValue={startDate}
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
           />
         </div>
 
         {/* Image URL */}
         <div>
-          <label className="block mb-1 font-medium">Image URL</label>
+          <label className={labelStyle}>
+            <MdImage className="text-xl" /> Image URL
+          </label>
           <input
             name="imageUrl"
             type="url"
             defaultValue={imageUrl}
             required
-            className="w-full px-4 py-2 rounded-md bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary"
+            className={`w-full px-4 py-2 rounded-md ${inputBg} focus:outline-none focus:ring-2 focus:ring-primary`}
             placeholder="https://example.com/image.jpg"
           />
         </div>
@@ -153,23 +191,27 @@ const UpdateGroup = () => {
         {/* Readonly User Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-1 font-medium">Your Name</label>
+            <label className={labelStyle}>
+              <MdPerson className="text-xl" /> Your Name
+            </label>
             <input
               name="name"
               type="text"
               readOnly
               defaultValue={name}
-              className="w-full px-4 py-2 rounded-md bg-gray-600 text-gray-300 border border-gray-500"
+              className={`w-full px-4 py-2 rounded-md ${readOnlyBg}`}
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Your Email</label>
+            <label className={labelStyle}>
+              <MdEmail className="text-xl" /> Your Email
+            </label>
             <input
               name="email"
               type="email"
               readOnly
               defaultValue={email}
-              className="w-full px-4 py-2 rounded-md bg-gray-600 text-gray-300 border border-gray-500"
+              className={`w-full px-4 py-2 rounded-md ${readOnlyBg}`}
             />
           </div>
         </div>
@@ -178,9 +220,9 @@ const UpdateGroup = () => {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition flex items-center justify-center gap-2"
           >
-            Update Group
+            <MdUpdate className="text-xl" /> Update Group
           </button>
         </div>
       </form>
