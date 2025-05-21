@@ -64,7 +64,7 @@ const CreateGroup = () => {
         onSubmit={handleCreateGroup}
         className={`space-y-6 p-8 rounded-xl shadow-lg transition-colors duration-300 ${
           theme === "light"
-            ? "bg-white text-gray-900"
+            ? "bg-white text-gray-900 border border-gray-200"
             : "bg-gray-800 text-white"
         }`}
       >
