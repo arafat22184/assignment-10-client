@@ -13,11 +13,11 @@ If you are developing a production application, we recommend using TypeScript wi
 
 # 🎯 HobbyHub - Local Hobby Group Organizer
 
-[![Live Site](https://img.shields.io/badge/Live_Site-Active-brightgreen)](https://hobbyhub-yourdomain.web.app)
+[![Live Site](https://img.shields.io/badge/Live_Site-Active-brightgreen)](https://assignment-10-client-715c7.web.app/)
 [![React](https://img.shields.io/badge/React-19.1-blue)](https://react.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-11.7-orange)](https://firebase.google.com)
 
-🌐 **Live Demo:** https://hobbyhub-yourdomain.web.app
+🌐 **Live Demo:** https://assignment-10-client-715c7.web.app/
 
 ![HobbyHub Banner](./src/assets/2025-05-22_03-16.png)
 
