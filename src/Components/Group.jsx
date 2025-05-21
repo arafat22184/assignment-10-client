@@ -1,13 +1,21 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
 import { format, parseISO } from "date-fns";
 import { FaUserFriends, FaCalendarAlt } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Group = ({ group }) => {
+  const { theme } = use(AuthContext);
   const formattedDate = format(parseISO(group.startDate), "MMMM d, yyyy");
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 flex flex-col">
+    <div
+      className={`${
+        theme === "light"
+          ? "bg-white border-gray-200"
+          : "bg-gray-800 border-gray-700"
+      } border rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 flex flex-col`}
+    >
       {/* Image */}
       <img
         src={group.imageUrl}
@@ -18,17 +26,29 @@ const Group = ({ group }) => {
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         {/* Group Name */}
-        <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
+        <h2
+          className={`${
+            theme === "light" ? "text-gray-900" : "text-white"
+          } text-2xl font-bold mb-2`}
+        >
           {group.groupName}
         </h2>
 
         {/* Hobby Category */}
-        <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-2">
+        <p
+          className={`${
+            theme === "light" ? "text-indigo-600" : "text-indigo-400"
+          } text-sm font-medium mb-2`}
+        >
           {group.hobbyCategory}
         </p>
 
         {/* Members & Start Date */}
-        <div className="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <div
+          className={`flex justify-between items-center text-sm ${
+            theme === "light" ? "text-gray-600" : "text-gray-400"
+          } mb-4`}
+        >
           <span className="flex items-center gap-1">
             <FaUserFriends className="text-indigo-500" /> {group.maxMembers}{" "}
             Members

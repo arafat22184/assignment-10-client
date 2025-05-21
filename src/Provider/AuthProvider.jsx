@@ -20,6 +20,18 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState("");
 
+  // Theme
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    const localTheme = localStorage.getItem("theme");
+    if (localTheme) {
+      setTheme(localTheme);
+      document.documentElement.setAttribute("data-theme", localTheme);
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
+
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -66,6 +78,8 @@ const AuthProvider = ({ children }) => {
     updateUser,
     location,
     setLocation,
+    setTheme,
+    theme,
   };
   return <AuthContext value={authData}>{children}</AuthContext>;
 };
