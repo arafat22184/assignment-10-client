@@ -1,14 +1,15 @@
-import { use, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
+import { HiUser, HiMail, HiLockClosed, HiPhotograph } from "react-icons/hi";
 
 const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { createUser, updateUser, setUser, location } = use(AuthContext);
+  const { createUser, updateUser, setUser, location, theme } =
+    useContext(AuthContext);
 
-  // Form Submit
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -17,19 +18,16 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    // Check for minimum length
     if (password.length < 6) {
       setError("Password must be at least 6 characters long.");
       return;
     }
 
-    // Check for Uppercase
     if (!/[A-Z]/.test(password)) {
       setError("Password must contain at least one uppercase letter.");
       return;
     }
 
-    // Check for lowercase
     if (!/[a-z]/.test(password)) {
       setError("Password must contain at least one lowercase letter.");
       return;
@@ -58,7 +56,7 @@ const Register = () => {
           .catch(() => setUser(user));
       })
       .catch((error) => {
-        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
           setError(
             "This email is already registered. Please log in or use a different email."
           );
@@ -79,70 +77,93 @@ const Register = () => {
       });
   };
 
+  const inputBg = theme === "light" ? "bg-white" : "bg-gray-700";
+  const inputBorder = theme === "light" ? "border-gray-300" : "border-gray-700";
+  const textColor = theme === "light" ? "text-gray-900" : "text-white";
+  const labelColor = theme === "light" ? "text-gray-700" : "text-gray-300";
+  const boxBg =
+    theme === "light" ? "bg-white border border-gray-200" : "bg-gray-900";
+  const buttonBg =
+    theme === "light"
+      ? "bg-indigo-600 hover:bg-indigo-700"
+      : "bg-indigo-600 hover:bg-indigo-700";
+
   return (
     <div className="flex items-center justify-center px-4 my-8">
-      <div className="w-full max-w-md bg-gray-800 p-8 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold mb-6 text-center text-white">
+      <div className={`w-full max-w-md p-8 rounded-xl shadow-lg ${boxBg}`}>
+        <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>
           Register for HobbyHub
         </h2>
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <label className="block mb-1 text-gray-300">Name</label>
+            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
+              <HiUser className="text-xl" />
+              <span>Name</span>
+            </label>
             <input
               type="text"
               name="name"
               required
-              className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-700 text-white"
+              className={`w-full px-4 py-2 border rounded-md ${inputBg} ${inputBorder} ${textColor}`}
               placeholder="Your Name"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-gray-300">Photo URL</label>
+            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
+              <HiPhotograph className="text-xl" />
+              <span>Photo URL</span>
+            </label>
             <input
-              type="text"
+              type="url"
               name="photoURL"
               required
-              className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-700 text-white"
+              className={`w-full px-4 py-2 border rounded-md ${inputBg} ${inputBorder} ${textColor}`}
               placeholder="https://example.com/photo.jpg"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-gray-300">Email</label>
+            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
+              <HiMail className="text-xl" />
+              <span>Email</span>
+            </label>
             <input
               type="email"
               name="email"
               required
-              className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-700 text-white"
+              className={`w-full px-4 py-2 border rounded-md ${inputBg} ${inputBorder} ${textColor}`}
               placeholder="your@email.com"
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-gray-300">Password</label>
+            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
+              <HiLockClosed className="text-xl" />
+              <span>Password</span>
+            </label>
             <input
               type="password"
               name="password"
               required
-              className="w-full px-4 py-2 border border-gray-700 rounded-md bg-gray-700 text-white"
+              className={`w-full px-4 py-2 border rounded-md ${inputBg} ${inputBorder} ${textColor}`}
               placeholder="Your password"
               autoComplete="true"
             />
           </div>
 
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
 
           <button
             type="submit"
-            className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md transition duration-300"
+            className={`w-full py-2 font-semibold rounded-md transition duration-300 text-white ${buttonBg} cursor-pointer`}
           >
             Register
           </button>
         </form>
 
-        <div className="mt-4 text-center text-gray-300 text-sm">
+        <div className={`mt-4 text-center text-sm ${labelColor}`}>
           Already have an account?{" "}
           <Link to="/login" className="text-blue-400 hover:underline">
             Login here

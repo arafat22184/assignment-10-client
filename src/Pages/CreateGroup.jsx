@@ -30,18 +30,31 @@ const CreateGroup = () => {
       body: JSON.stringify(newGroup),
     })
       .then((res) => res.json())
-      .then(() => {
-        toast.success("Group Created Successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        form.reset();
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Group Created Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          form.reset();
+        } else {
+          toast.error("Something went wrong. Try again.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
       });
   };
 
@@ -201,7 +214,7 @@ const CreateGroup = () => {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition cursor-pointer"
           >
             Create Group
           </button>
