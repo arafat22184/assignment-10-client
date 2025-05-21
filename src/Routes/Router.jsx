@@ -9,6 +9,7 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import AllGroups from "../Pages/AllGroups";
 import GroupDetails from "../Pages/GroupDetails";
+import UpdateGroup from "../Pages/UpdateGroup";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,17 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/allGroups/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
+      {
+        path: "/updateGroup/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateGroup></UpdateGroup>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/userGroups/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
