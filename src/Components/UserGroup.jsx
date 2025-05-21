@@ -15,7 +15,7 @@ const UserGroup = ({ group, i, setUserGroups, userGroups }) => {
 
   const handleDelete = (id) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: "Delete this group — are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -32,7 +32,7 @@ const UserGroup = ({ group, i, setUserGroups, userGroups }) => {
             if (data.deletedCount) {
               Swal.fire({
                 title: "Deleted!",
-                text: "Your Coffee has been deleted.",
+                text: "Your Group has been deleted.",
                 icon: "success",
               });
 
@@ -56,7 +56,7 @@ const UserGroup = ({ group, i, setUserGroups, userGroups }) => {
         <td className="p-3">{maxMembers}</td>
         <td className="p-3">{startDate}</td>
         <td className="p-3">{meetingLocation}</td>
-        <td className="p-3 text-center space-y-2 xl:space-y-0 xl:space-x-2">
+        <td className="p-3 text-center flex justify-center items-center gap-2">
           <Link to={`/updateGroup/${_id}`}>
             <button className="inline-flex items-center gap-2 bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md transition duration-300 cursor-pointer">
               <FaEdit />

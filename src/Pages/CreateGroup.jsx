@@ -8,7 +8,7 @@ import {
   FaImage,
 } from "react-icons/fa";
 import { MdCategory, MdDescription, MdEmail, MdPerson } from "react-icons/md";
-import { IoMdPerson } from "react-icons/io";
+import { IoIosCreate, IoMdPerson } from "react-icons/io";
 
 const CreateGroup = () => {
   const { user, theme } = use(AuthContext);
@@ -214,8 +214,9 @@ const CreateGroup = () => {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition cursor-pointer"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition cursor-pointer flex justify-center items-center gap-2"
           >
+            <IoIosCreate />
             Create Group
           </button>
         </div>

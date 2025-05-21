@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { HiUser, HiMail, HiLockClosed, HiPhotograph } from "react-icons/hi";
+import { MdPersonAdd } from "react-icons/md";
 
 const Register = () => {
   const [error, setError] = useState("");
@@ -157,9 +158,9 @@ const Register = () => {
 
           <button
             type="submit"
-            className={`w-full py-2 font-semibold rounded-md transition duration-300 text-white ${buttonBg} cursor-pointer`}
+            className={`w-full py-2 font-semibold rounded-md transition duration-300 text-white ${buttonBg} cursor-pointer flex justify-center items-center gap-2`}
           >
-            Register
+            <MdPersonAdd /> Register
           </button>
         </form>
 

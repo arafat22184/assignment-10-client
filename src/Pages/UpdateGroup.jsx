@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import {
   MdGroups,
@@ -13,6 +13,7 @@ import {
   MdEmail,
   MdUpdate,
 } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const UpdateGroup = () => {
   const { user, theme } = useContext(AuthContext);
@@ -28,6 +29,7 @@ const UpdateGroup = () => {
     startDate,
     _id,
   } = useLoaderData();
+  const navigate = useNavigate();
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -46,7 +48,30 @@ const UpdateGroup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Updated successfully:", data);
+        if (data.modifiedCount) {
+          navigate("/myGroups");
+          toast.success("Group updated successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          toast.error("Please modify some details before submitting.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
       });
   };
 
@@ -220,7 +245,7 @@ const UpdateGroup = () => {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition flex items-center justify-center gap-2"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md font-semibold transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <MdUpdate className="text-xl" /> Update Group
           </button>

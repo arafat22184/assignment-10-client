@@ -21,7 +21,7 @@ const UserGroups = ({ userGroups, setUserGroups }) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-left border-collapse text-sm">
+      <table className="lg:min-w-full min-w-6xl text-left border-collapse text-sm">
         <thead>
           <tr>
             <th className={tableHeadStyle}>
