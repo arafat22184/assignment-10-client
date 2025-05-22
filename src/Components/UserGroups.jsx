@@ -10,7 +10,7 @@ import {
   FaCog,
 } from "react-icons/fa";
 
-const UserGroups = ({ userGroups, setUserGroups }) => {
+const UserGroups = ({ allGroups, setallGroups }) => {
   const { theme } = useContext(AuthContext);
 
   const tableHeadStyle = `p-3 text-sm font-semibold ${
@@ -37,7 +37,7 @@ const UserGroups = ({ userGroups, setUserGroups }) => {
               <FaUsers className="inline-block mr-1" /> Members
             </th>
             <th className={tableHeadStyle}>
-              <FaCalendarAlt className="inline-block mr-1" /> Start Date
+              <FaCalendarAlt className="inline-block mr-1" /> Last Date
             </th>
             <th className={tableHeadStyle}>
               <FaMapMarkerAlt className="inline-block mr-1" /> Location
@@ -48,12 +48,12 @@ const UserGroups = ({ userGroups, setUserGroups }) => {
           </tr>
         </thead>
         <tbody className={tableBodyStyle}>
-          {userGroups.map((group, i) => (
+          {allGroups.map((group, i) => (
             <UserGroup
               key={group._id}
               i={i}
-              setUserGroups={setUserGroups}
-              userGroups={userGroups}
+              setallGroups={setallGroups}
+              allGroups={allGroups}
               group={group}
             />
           ))}

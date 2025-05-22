@@ -39,25 +39,22 @@ const UpdateGroup = () => {
     const uid = user.uid;
     const updateGroup = { ...formAllValues, uid };
 
-    fetch(
-      `https://assignment-10-server-lac-sigma.vercel.app/userGroups/${_id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updateGroup),
-      }
-    )
+    fetch(`http://localhost:3000/allGroups/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateGroup),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          navigate("/myGroups");
+          navigate(`/groups/${_id}`);
           toast.success("Group updated successfully", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
-            closeOnClick: false,
+            closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
@@ -68,7 +65,7 @@ const UpdateGroup = () => {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
-            closeOnClick: false,
+            closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,

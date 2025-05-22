@@ -4,25 +4,25 @@ import { AuthContext } from "../Provider/AuthProvider";
 import UserGroups from "../Components/UserGroups";
 
 const MyGroups = () => {
-  const initialUserGroups = useLoaderData();
+  const initialallGroups = useLoaderData();
   const { user } = use(AuthContext);
-  const filterUserGroups = initialUserGroups.filter(
+  const filterallGroups = initialallGroups.filter(
     (group) => group.uid === user.uid
   );
-  const [userGroups, setUserGroups] = useState(filterUserGroups);
+  const [allGroups, setallGroups] = useState(filterallGroups);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold mb-6 text-center">My Created Groups</h2>
 
-      {userGroups.length === 0 ? (
+      {allGroups.length === 0 ? (
         <p className="text-center text-4xl text-gray-300">
           You haven’t created any groups yet.
         </p>
       ) : (
         <UserGroups
-          userGroups={userGroups}
-          setUserGroups={setUserGroups}
+          allGroups={allGroups}
+          setallGroups={setallGroups}
         ></UserGroups>
       )}
     </div>

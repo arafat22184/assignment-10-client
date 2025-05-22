@@ -9,9 +9,11 @@ import {
 } from "react-icons/fa";
 import { MdCategory, MdDescription, MdEmail, MdPerson } from "react-icons/md";
 import { IoIosCreate, IoMdPerson } from "react-icons/io";
+import { useNavigate } from "react-router";
 
 const CreateGroup = () => {
   const { user, theme } = use(AuthContext);
+  const navigate = useNavigate();
 
   const handleCreateGroup = (e) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const CreateGroup = () => {
 
     const newGroup = { ...formAllValues, uid };
 
-    fetch("https://assignment-10-server-lac-sigma.vercel.app/userGroups", {
+    fetch("http://localhost:3000/allGroups", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,7 +33,9 @@ const CreateGroup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        const insertedId = data.insertedId;
+        if (insertedId) {
+          navigate(`/groups/${insertedId}`);
           toast.success("Group Created Successfully", {
             position: "top-right",
             autoClose: 5000,
@@ -160,10 +164,10 @@ const CreateGroup = () => {
           />
         </div>
 
-        {/* Start Date */}
+        {/* End Date */}
         <div>
           <label className=" mb-1 font-medium flex items-center gap-1">
-            <FaCalendarAlt /> Start Date
+            <FaCalendarAlt /> Last date to join the Group
           </label>
           <input type="date" name="startDate" required className={inputStyle} />
         </div>
