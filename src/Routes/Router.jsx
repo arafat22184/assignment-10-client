@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
         loader: () =>
-          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/sixGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {

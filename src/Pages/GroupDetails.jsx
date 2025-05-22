@@ -44,6 +44,25 @@ const GroupDetails = () => {
           {group.groupName}
         </h2>
 
+        {/* Author Details */}
+        <div className="flex items-center gap-3 p-2">
+          <img
+            className="w-10 h-10 rounded-full border-2 border-blue-500 object-cover"
+            src={group.userPhotoURL}
+            alt={group.name}
+          />
+          <div>
+            <p className="text-sm">Author</p>
+            <h4
+              className={`text-base font-semibold ${
+                theme === "light" ? "text-gray-800" : "text-white"
+              }`}
+            >
+              {group.name}
+            </h4>
+          </div>
+        </div>
+
         {/* Hobby Category */}
         <p
           className={`text-sm font-medium mb-1 ${

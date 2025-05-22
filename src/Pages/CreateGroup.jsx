@@ -21,8 +21,9 @@ const CreateGroup = () => {
     const formData = new FormData(form);
     const formAllValues = Object.fromEntries(formData.entries());
     const uid = user.uid;
+    const userPhotoURL = user.photoURL;
 
-    const newGroup = { ...formAllValues, uid };
+    const newGroup = { ...formAllValues, uid, userPhotoURL };
 
     fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups", {
       method: "POST",

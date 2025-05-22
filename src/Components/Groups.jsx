@@ -1,25 +1,12 @@
-import { use, useEffect, useState } from "react";
+import { use } from "react";
 import { Link, useLoaderData } from "react-router";
-import { isAfter, isEqual, parseISO, startOfToday } from "date-fns";
 import { Typewriter } from "react-simple-typewriter";
 import Group from "./Group";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Groups = () => {
   const { theme } = use(AuthContext);
-  const allGroups = useLoaderData();
-  const [groups, setGroups] = useState([]);
-
-  useEffect(() => {
-    const today = startOfToday();
-
-    const upcomingGroups = allGroups.filter((group) => {
-      const groupDate = parseISO(group.startDate);
-      return isAfter(groupDate, today) || isEqual(groupDate, today);
-    });
-
-    setGroups(upcomingGroups.slice(0, 6));
-  }, [allGroups]);
+  const groups = useLoaderData();
 
   return (
     <div
