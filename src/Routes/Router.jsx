@@ -20,13 +20,15 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/allGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/groups",
         Component: AllGroups,
-        loader: () => fetch("http://localhost:3000/allGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
@@ -44,7 +46,8 @@ const router = createBrowserRouter([
             <MyGroups></MyGroups>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:3000/allGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
@@ -55,7 +58,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/allGroups/${params.id}`),
+          fetch(
+            `https://assignment-10-server-lac-sigma.vercel.app/allGroups/${params.id}`
+          ),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
@@ -66,7 +71,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/allGroups/${params.id}`),
+          fetch(
+            `https://assignment-10-server-lac-sigma.vercel.app/allGroups/${params.id}`
+          ),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {

@@ -24,7 +24,7 @@ const CreateGroup = () => {
 
     const newGroup = { ...formAllValues, uid };
 
-    fetch("http://localhost:3000/allGroups", {
+    fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups", {
       method: "POST",
       headers: {
         "content-type": "application/json",
