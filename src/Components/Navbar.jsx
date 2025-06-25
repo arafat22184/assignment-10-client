@@ -50,7 +50,7 @@ const Navbar = () => {
     <>
       <NavLink
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-3 px-7 font-semibold rounded ${
+          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
             isActive ? "border-b-4 rounded-none border-primary" : ""
           }`
         }
@@ -60,7 +60,7 @@ const Navbar = () => {
       </NavLink>
       <NavLink
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-3 px-7 font-semibold rounded ${
+          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
             isActive ? "border-b-4 rounded-none border-primary" : ""
           }`
         }
@@ -70,7 +70,7 @@ const Navbar = () => {
       </NavLink>
       <NavLink
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-3 px-7 font-semibold rounded ${
+          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
             isActive ? "border-b-4 rounded-none border-primary" : ""
           }`
         }
@@ -81,7 +81,7 @@ const Navbar = () => {
 
       <NavLink
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-3 px-7 font-semibold rounded ${
+          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
             isActive ? "border-b-4 rounded-none border-primary" : ""
           }`
         }
@@ -136,7 +136,7 @@ const Navbar = () => {
       />
       <button
         onClick={handleSignOut}
-        className=" text-[18px] text-red-500 py-3 px-7 font-semibold border rounded cursor-pointer hover:bg-red-500 border-red-500 hover:text-white flex items-center gap-2"
+        className=" text-[18px] text-red-500 py-2 px-4 font-semibold border rounded cursor-pointer hover:bg-red-500 border-red-500 hover:text-white flex items-center gap-2"
       >
         Logout{" "}
         <span className="text-2xl">
@@ -147,7 +147,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="navbar max-w-11/12 mx-auto">
+    <nav className="navbar max-w-7xl mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -204,17 +204,19 @@ const Navbar = () => {
         </div>
         <Link className="flex items-center gap-5" to={"/"}>
           <img
-            className="w-20"
+            className="w-10 lg:w-12 xl:w-20"
             src={
               "https://i.ibb.co.com/YTLkKY8d/Chat-GPT-Image-May-20-2025-01-59-22-AM.png"
             }
             alt="Logo"
           />
-          <p className="text-primary font-extrabold text-2xl">HobbyHub</p>
+          <p className="text-primary font-extrabold text-xl xl:text-2xl">
+            HobbyHub
+          </p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu space-x-8 menu-horizontal px-1">{links}</ul>
+        <ul className="menu space-x-6 menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end hidden lg:flex space-x-6">
         <label className="swap swap-rotate">

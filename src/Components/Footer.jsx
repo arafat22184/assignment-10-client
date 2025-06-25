@@ -15,17 +15,17 @@ const Footer = () => {
 
   return (
     <footer
-      className={`${bgColor} ${textColor} pt-10 pb-5 px-4 md:px-12 border-t border-primary`}
+      className={`${bgColor} ${textColor} pt-10 pb-5 lg:px-12 px-4 border-t border-primary`}
     >
       <div
-        className={`max-w-11/12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b ${borderColor} pb-10`}
+        className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b ${borderColor} pb-10`}
       >
         {/* Logo and Description */}
         <div>
           <img
             src="https://i.ibb.co.com/YTLkKY8d/Chat-GPT-Image-May-20-2025-01-59-22-AM.png"
             alt="HobbyHub Logo"
-            className="w-32 mb-4"
+            className="w-10 lg:w-12 xl:w-20 mb-4"
           />
           <p className={`text-sm leading-relaxed ${mutedText}`}>
             HobbyHub connects people through shared passions — from book clubs

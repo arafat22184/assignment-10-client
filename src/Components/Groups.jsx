@@ -47,7 +47,7 @@ const Groups = () => {
       </h1>
 
       {/* Group Cards Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {groups.map((group) => (
           <Group key={group._id} group={group} />
         ))}

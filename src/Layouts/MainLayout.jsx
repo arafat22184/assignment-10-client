@@ -24,7 +24,7 @@ const MainLayout = () => {
       <div className="border-b border-primary">
         <Navbar></Navbar>
       </div>
-      <div className="max-w-11/12 mx-auto min-h-[calc(100vh-450.75px)]">
+      <div className="max-w-7xl mx-auto min-h-[calc(100vh-450.75px)]">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>

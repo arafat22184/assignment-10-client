@@ -24,12 +24,9 @@ const UserGroup = ({ group, i, setallGroups, allGroups }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(
-          `https://assignment-10-server-lac-sigma.vercel.app/allGroups/${id}`,
-          {
-            method: "DELETE",
-          }
-        )
+        fetch(`http://localhost:3000/allGroups/${id}`, {
+          method: "DELETE",
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {

@@ -13,6 +13,18 @@ const Login = () => {
 
   useEffect(() => {
     setLocation(location.state);
+    if (location.state === "/createGroup" || location.state === "/myGroups") {
+      toast.error("Please Log in first", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   }, [location.state, setLocation]);
 
   const handleLogin = (e) => {
