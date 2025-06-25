@@ -23,12 +23,10 @@ const Register = () => {
       setError("Password must be at least 6 characters long.");
       return;
     }
-
     if (!/[A-Z]/.test(password)) {
       setError("Password must contain at least one uppercase letter.");
       return;
     }
-
     if (!/[a-z]/.test(password)) {
       setError("Password must contain at least one lowercase letter.");
       return;
@@ -38,11 +36,11 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        navigate(`${location ? location : "/"}`);
+        navigate(location ? location : "/");
         const user = result.user;
-        updateUser({ displayName: name, photoURL: photoURL })
+        updateUser({ displayName: name, photoURL })
           .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photoURL });
+            setUser({ ...user, displayName: name, photoURL });
             toast.success("Account created successfully! Welcome aboard 🎉", {
               position: "top-right",
               autoClose: 5000,
@@ -78,27 +76,38 @@ const Register = () => {
       });
   };
 
+  // Theme based styles
+  const contentBox =
+    theme === "light" ? "border-slate-300" : "border-slate-500";
+  const boxBg =
+    theme === "light" ? "bg-gray-50 text-gray-800" : "bg-gray-800 text-white";
   const inputBg = theme === "light" ? "bg-white" : "bg-gray-700";
   const inputBorder = theme === "light" ? "border-gray-300" : "border-gray-700";
   const textColor = theme === "light" ? "text-gray-900" : "text-white";
   const labelColor = theme === "light" ? "text-gray-700" : "text-gray-300";
-  const buttonBg =
-    theme === "light"
-      ? "bg-indigo-600 hover:bg-indigo-700"
-      : "bg-indigo-600 hover:bg-indigo-700";
+  const buttonBg = "bg-indigo-600 hover:bg-indigo-700";
 
   return (
-    <div className="flex items-center justify-center px-4 my-8">
-      <div className={`w-full max-w-md p-8 rounded-xl shadow-lg `}>
+    <div
+      className={`flex items-stretch justify-center mx-4 md:mx-auto my-16 lg:max-w-4xl max-w-xl border ${contentBox}`}
+    >
+      <div className="flex-1 hidden lg:block">
+        <img
+          className="h-full w-full object-cover"
+          src="https://i.ibb.co/LXgqt0DY/register.jpg"
+          alt="Register"
+        />
+      </div>
+
+      <div className={`w-full p-8 shadow-lg flex-1 ${boxBg}`}>
         <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>
           Register for HobbyHub
         </h2>
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
-              <HiUser className="text-xl" />
-              <span>Name</span>
+            <label className={`flex items-center gap-2 mb-1 ${labelColor}`}>
+              <HiUser className="text-xl" /> Name
             </label>
             <input
               type="text"
@@ -110,9 +119,8 @@ const Register = () => {
           </div>
 
           <div>
-            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
-              <HiPhotograph className="text-xl" />
-              <span>Photo URL</span>
+            <label className={`flex items-center gap-2 mb-1 ${labelColor}`}>
+              <HiPhotograph className="text-xl" /> Photo URL
             </label>
             <input
               type="url"
@@ -124,9 +132,8 @@ const Register = () => {
           </div>
 
           <div>
-            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
-              <HiMail className="text-xl" />
-              <span>Email</span>
+            <label className={`flex items-center gap-2 mb-1 ${labelColor}`}>
+              <HiMail className="text-xl" /> Email
             </label>
             <input
               type="email"
@@ -138,9 +145,8 @@ const Register = () => {
           </div>
 
           <div>
-            <label className={`flex items-center mb-1 space-x-2 ${labelColor}`}>
-              <HiLockClosed className="text-xl" />
-              <span>Password</span>
+            <label className={`flex items-center gap-2 mb-1 ${labelColor}`}>
+              <HiLockClosed className="text-xl" /> Password
             </label>
             <input
               type="password"
@@ -156,7 +162,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className={`w-full py-2 font-semibold rounded-md transition duration-300 text-white ${buttonBg} cursor-pointer flex justify-center items-center gap-2`}
+            className={`w-full py-2 ${buttonBg} font-semibold rounded-md transition duration-300 text-white flex items-center justify-center gap-2 cursor-pointer`}
           >
             <MdPersonAdd /> Register
           </button>

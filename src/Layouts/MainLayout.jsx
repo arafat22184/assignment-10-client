@@ -29,8 +29,8 @@ const MainLayout = () => {
         theme="light"
       />
 
-      <div className="border-b border-primary">
-        <Navbar></Navbar>
+      <div className="sticky top-0 z-50 border-b border-primary">
+        <Navbar />
       </div>
       <div className="max-w-7xl mx-auto min-h-[calc(100vh-450.75px)]">
         <Outlet></Outlet>

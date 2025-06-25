@@ -15,7 +15,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`${bgColor} ${textColor} pt-10 pb-5 lg:px-12 px-4 border-t border-primary`}
+      className={`${bgColor} ${textColor} mt-16 pt-10 pb-5 lg:px-12 px-4 border-t border-primary`}
     >
       <div
         className={`max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b ${borderColor} pb-10`}

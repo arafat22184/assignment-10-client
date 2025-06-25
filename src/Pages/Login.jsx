@@ -94,6 +94,10 @@ const Login = () => {
   };
 
   // Theme based styles
+  const contentBox =
+    theme === "light" ? "border-slate-300" : "border-slate-500";
+  const boxBg =
+    theme === "light" ? "bg-gray-50 text-gray-800" : "bg-gray-800 text-white";
   const inputBg = theme === "light" ? "bg-white" : "bg-gray-700";
   const inputBorder = theme === "light" ? "border-gray-300" : "border-gray-700";
   const textColor = theme === "light" ? "text-gray-900" : "text-white";
@@ -108,8 +112,17 @@ const Login = () => {
       : "bg-gray-700 hover:bg-indigo-600 text-white";
 
   return (
-    <div className="flex items-center justify-center px-4 my-8">
-      <div className={`w-full max-w-md p-8 rounded-xl shadow-lg`}>
+    <div
+      className={`flex items-stretch justify-center mx-4 md:mx-auto my-16 lg:max-w-4xl max-w-xl border ${contentBox}`}
+    >
+      <div className="flex-1 hidden lg:block">
+        <img
+          className="h-full w-full object-cover"
+          src="https://i.ibb.co/j9br0KJ3/security.jpg"
+          alt="login image"
+        />
+      </div>
+      <div className={`w-full p-8 shadow-lg flex-1 ${boxBg}`}>
         <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>
           Login to HobbyHub
         </h2>
