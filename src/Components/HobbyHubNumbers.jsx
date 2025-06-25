@@ -1,12 +1,16 @@
-import React, { use } from "react";
+import React, { useRef } from "react";
 import CountUp from "react-countup";
+import { useInView } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const HobbyHubNumbers = () => {
-  const { theme } = use(AuthContext);
+  const { theme } = React.useContext(AuthContext);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
 
   return (
     <section
+      ref={ref}
       className={`py-16 mb-12 rounded-2xl px-4 md:px-8 lg:px-16 transition-colors duration-300`}
     >
       <div className="max-w-6xl mx-auto text-center">
@@ -37,7 +41,7 @@ const HobbyHubNumbers = () => {
             }`}
           >
             <h3 className="text-5xl font-bold text-indigo-600 mb-4">
-              <CountUp end={1200} duration={2.5} />+
+              {isInView ? <CountUp end={1200} duration={2.5} /> : 0}+
             </h3>
             <p
               className={`text-xl font-semibold mb-2 ${
@@ -64,7 +68,7 @@ const HobbyHubNumbers = () => {
             }`}
           >
             <h3 className="text-5xl font-bold text-emerald-500 mb-4">
-              <CountUp end={350} duration={2.5} />+
+              {isInView ? <CountUp end={350} duration={2.5} /> : 0}+
             </h3>
             <p
               className={`text-xl font-semibold mb-2 ${
@@ -91,7 +95,7 @@ const HobbyHubNumbers = () => {
             }`}
           >
             <h3 className="text-5xl font-bold text-pink-500 mb-4">
-              <CountUp end={75} duration={2.5} />+
+              {isInView ? <CountUp end={75} duration={2.5} /> : 0}+
             </h3>
             <p
               className={`text-xl font-semibold mb-2 ${
