@@ -11,6 +11,8 @@ import AllGroups from "../Pages/AllGroups";
 import GroupDetails from "../Pages/GroupDetails";
 import UpdateGroup from "../Pages/UpdateGroup";
 import ErrorPage from "../Pages/ErrorPage";
+import AboutUs from "../Pages/AboutUs";
+import ContactUs from "../Pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +70,14 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/allGroups/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
+      {
+        path: "/about",
+        Component: AboutUs,
+      },
+      {
+        path: "/contactUs",
+        Component: ContactUs,
       },
       {
         path: "/login",

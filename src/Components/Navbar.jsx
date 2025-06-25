@@ -56,25 +56,25 @@ const Navbar = () => {
       </NavLink>
       <NavLink
         onClick={() => setIsMenuOpen(false)}
-        to="/createGroup"
+        to="/contactUs"
         className={({ isActive }) =>
           `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
             isActive ? "border-b-4 border-white" : ""
           }`
         }
       >
-        Create Group
+        Contact Us
       </NavLink>
       <NavLink
         onClick={() => setIsMenuOpen(false)}
-        to="/myGroups"
+        to="/about"
         className={({ isActive }) =>
           `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
             isActive ? "border-b-4 border-white" : ""
           }`
         }
       >
-        My Groups
+        About
       </NavLink>
     </>
   );
