@@ -10,18 +10,10 @@ const Groups = () => {
 
   return (
     <div
-      className={`min-w-full px-4 py-12 my-12 rounded-2xl transition-colors duration-300 ${
-        theme === "light"
-          ? "bg-gray-50 text-gray-900"
-          : "bg-gray-900 text-white"
-      }`}
+      className={`min-w-full px-4 py-12 my-12 rounded-2xl transition-colors duration-300`}
     >
       {/* Typewriter Heading */}
-      <h1
-        className={`text-4xl font-bold text-center mb-10 ${
-          theme === "light" ? "text-gray-900" : "text-white"
-        }`}
-      >
+      <h1 className={`text-4xl font-bold text-center mb-10`}>
         <Typewriter
           cursor
           cursorBlinking

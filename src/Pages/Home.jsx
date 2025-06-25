@@ -1,8 +1,8 @@
-import React from "react";
 import Banner from "../Components/Banner";
 import WhyJoin from "../Components/WhyJoin";
 import HobbyHubNumbers from "../Components/HobbyHubNumbers";
 import Groups from "../Components/Groups";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Home = () => {
   return (

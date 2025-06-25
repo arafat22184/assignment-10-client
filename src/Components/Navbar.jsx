@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
@@ -6,7 +6,8 @@ import { MdLogout } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
-  const { user, logOut, setTheme } = use(AuthContext);
+  const { user, logOut, setTheme } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleThemeChange = () => {
     setTheme((prev) => {
@@ -19,234 +20,209 @@ const Navbar = () => {
   const currentTheme = localStorage.getItem("theme");
 
   const handleSignOut = () => {
+    setIsMenuOpen(false);
     logOut()
       .then(() => {
-        toast.success("Sign out Successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.success("Sign out Successfully");
       })
       .catch(() => {
-        toast.error("Oops! Something went wrong. Please try again later.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.error("Oops! Something went wrong.");
       });
   };
 
-  const links = (
+  const navLinks = (
     <>
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
+        to="/"
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
-            isActive ? "border-b-4 rounded-none border-primary" : ""
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+            isActive ? "border-b-4 border-white" : ""
           }`
         }
-        to={"/"}
       >
         Home
       </NavLink>
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
+        to="/groups"
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
-            isActive ? "border-b-4 rounded-none border-primary" : ""
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+            isActive ? "border-b-4 border-white" : ""
           }`
         }
-        to={"/groups"}
       >
         All Groups
       </NavLink>
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
+        to="/createGroup"
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
-            isActive ? "border-b-4 rounded-none border-primary" : ""
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+            isActive ? "border-b-4 border-white" : ""
           }`
         }
-        to={"/createGroup"}
       >
         Create Group
       </NavLink>
-
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
+        to="/myGroups"
         className={({ isActive }) =>
-          `hover:bg-primary text-[18px] hover:text-white py-2 px-2 font-semibold rounded ${
-            isActive ? "border-b-4 rounded-none border-primary" : ""
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+            isActive ? "border-b-4 border-white" : ""
           }`
         }
-        to={"/myGroups"}
       >
         My Groups
       </NavLink>
     </>
   );
-  const loginLinks = (
+
+  const loginBtns = (
     <>
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
+        to="/login"
         className={({ isActive }) =>
-          `bg-primary text-[18px]  py-3 px-7 font-semibold hover:bg-primary hover:text-white rounded ${
-            isActive
-              ? "text-white"
-              : "border-2 border-primary bg-white text-primary"
+          `py-2 px-5 font-semibold rounded hover:bg-blue-950 hover:text-white border border-white ${
+            isActive ? "bg-white text-indigo-600" : "bg-indigo-600 text-white"
           }`
         }
-        to={"/login"}
       >
         Login
       </NavLink>
       <NavLink
+        onClick={() => setIsMenuOpen(false)}
+        to="/register"
         className={({ isActive }) =>
-          `bg-primary text-[18px]  py-3 px-7 font-semibold hover:bg-primary hover:text-white rounded ${
-            isActive
-              ? "text-white"
-              : "border-2 border-primary bg-white text-primary"
+          `py-2 px-5 font-semibold rounded hover:bg-blue-950 hover:text-white border border-white ${
+            isActive ? "bg-white text-indigo-600" : "bg-indigo-600 text-white"
           }`
         }
-        to={"/register"}
       >
         Register
       </NavLink>
     </>
   );
 
-  const logOutBtn = (
+  const logOutSection = (
     <>
       <img
-        className="w-14 h-14 rounded-full border-blue-500 border-4 "
+        className="w-12 h-12 rounded-full border-2 border-white"
         src={user?.photoURL}
-        alt="user photo"
+        alt="user"
         data-tooltip-id="tooltip-anchor-hide"
         data-tooltip-content={user?.email}
-        data-tooltip-delay-hide={1000}
       />
       <Tooltip
-        style={{ backgroundColor: "#7869BC", color: "#ffff" }}
+        style={{ backgroundColor: "#7869BC", color: "#fff" }}
         id="tooltip-anchor-hide"
       />
       <button
         onClick={handleSignOut}
-        className=" text-[18px] text-red-500 py-2 px-4 font-semibold border rounded cursor-pointer hover:bg-red-500 border-red-500 hover:text-white flex items-center gap-2"
+        className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer"
       >
-        Logout{" "}
-        <span className="text-2xl">
-          <MdLogout />
-        </span>
+        Logout <MdLogout size={20} />
       </button>
     </>
   );
 
   return (
-    <nav className="navbar max-w-7xl mx-auto">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow space-y-3"
-          >
-            {links}
-            {/* Theme */}
-            <label className="swap swap-rotate">
-              {/* this hidden checkbox controls the state */}
-              <input
-                onChange={handleThemeChange}
-                checked={currentTheme === "light" ? false : true}
-                type="checkbox"
-              />
-
-              {/* sun icon */}
-              <svg
-                className="swap-on h-10 w-10 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-              </svg>
-
-              {/* moon icon */}
-              <svg
-                className="swap-off h-10 w-10 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-              </svg>
-            </label>
-            {user ? logOutBtn : loginLinks}
-          </ul>
-        </div>
-        <Link className="flex items-center gap-5" to={"/"}>
+    <nav className="w-full shadow z-50 bg-[#605dff]">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3">
           <img
-            className="w-10 lg:w-12 xl:w-20"
-            src={
-              "https://i.ibb.co.com/YTLkKY8d/Chat-GPT-Image-May-20-2025-01-59-22-AM.png"
-            }
+            src="https://i.ibb.co/DD0mYSJj/Hobby-Logo.png"
             alt="Logo"
+            className="w-10 lg:w-12"
           />
-          <p className="text-primary font-extrabold text-xl xl:text-2xl">
+          <span className="text-lg lg:text-xl font-bold text-white">
             HobbyHub
-          </p>
+          </span>
         </Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu space-x-6 menu-horizontal px-1">{links}</ul>
-      </div>
-      <div className="navbar-end hidden lg:flex space-x-6">
-        <label className="swap swap-rotate">
-          {/* this hidden checkbox controls the state */}
-          <input
-            onChange={handleThemeChange}
-            checked={currentTheme === "light" ? false : true}
-            type="checkbox"
-          />
 
-          {/* sun icon */}
-          <svg
-            className="swap-on h-10 w-10 fill-current"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-          </svg>
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center space-x-4">{navLinks}</div>
 
-          {/* moon icon */}
-          <svg
-            className="swap-off h-10 w-10 fill-current"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
+        <div className="hidden lg:flex items-center space-x-4">
+          {/* Theme */}
+          <label className="swap swap-rotate">
+            {/* this hidden checkbox controls the state */}
+            <input
+              onChange={handleThemeChange}
+              checked={currentTheme === "light" ? false : true}
+              type="checkbox"
+            />
+
+            {/* sun icon */}
+            <svg
+              className="swap-on h-10 w-10 fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+            </svg>
+
+            {/* moon icon */}
+            <svg
+              className="swap-off h-10 w-10 fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+            </svg>
+          </label>
+          {user ? logOutSection : loginBtns}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="lg:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white text-3xl"
+            aria-label="Toggle Menu"
           >
-            <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-          </svg>
-        </label>
-        {user ? logOutBtn : loginLinks}
+            ☰
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Nav */}
+      {isMenuOpen && (
+        <div className="lg:hidden px-6 pb-4 space-y-4 flex flex-col">
+          {navLinks}
+          {/* Theme */}
+          <label className="swap swap-rotate">
+            {/* this hidden checkbox controls the state */}
+            <input
+              onChange={handleThemeChange}
+              checked={currentTheme === "light" ? false : true}
+              type="checkbox"
+            />
+
+            {/* sun icon */}
+            <svg
+              className="swap-on h-10 w-10 fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+            </svg>
+
+            {/* moon icon */}
+            <svg
+              className="swap-off h-10 w-10 fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+            </svg>
+          </label>
+          {user ? logOutSection : loginBtns}
+        </div>
+      )}
     </nav>
   );
 };

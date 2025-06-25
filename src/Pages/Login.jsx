@@ -109,11 +109,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center px-4 my-8">
-      <div
-        className={`w-full max-w-md p-8 rounded-xl shadow-lg ${
-          theme === "light" ? "border border-gray-200" : "bg-gray-900"
-        }`}
-      >
+      <div className={`w-full max-w-md p-8 rounded-xl shadow-lg`}>
         <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>
           Login to HobbyHub
         </h2>

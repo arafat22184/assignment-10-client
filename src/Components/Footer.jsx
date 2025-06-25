@@ -22,11 +22,20 @@ const Footer = () => {
       >
         {/* Logo and Description */}
         <div>
-          <img
-            src="https://i.ibb.co.com/YTLkKY8d/Chat-GPT-Image-May-20-2025-01-59-22-AM.png"
-            alt="HobbyHub Logo"
-            className="w-10 lg:w-12 xl:w-20 mb-4"
-          />
+          {theme === "light" ? (
+            <img
+              src="https://i.ibb.co/TxkQgRpX/Hobby-Logo-Black.png"
+              alt="HobbyHub Logo"
+              className="w-10 lg:w-12 xl:w-20 mb-4"
+            />
+          ) : (
+            <img
+              src="https://i.ibb.co/DD0mYSJj/Hobby-Logo.png"
+              alt="HobbyHub Logo"
+              className="w-10 lg:w-12 xl:w-20 mb-4"
+            />
+          )}
+
           <p className={`text-sm leading-relaxed ${mutedText}`}>
             HobbyHub connects people through shared passions — from book clubs
             to biking crews. Start or join a group and build your community.

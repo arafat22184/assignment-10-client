@@ -1,12 +1,20 @@
-import React from "react";
+import React, { use } from "react";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../Components/Footer";
 import { ToastContainer } from "react-toastify";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const MainLayout = () => {
+  const { theme } = use(AuthContext);
   return (
-    <div>
+    <div
+      className={` ${
+        theme === "light"
+          ? "bg-gray-50 text-gray-900"
+          : "bg-gray-900 text-white"
+      }`}
+    >
       {/* React Toastify */}
       <ToastContainer
         position="top-right"

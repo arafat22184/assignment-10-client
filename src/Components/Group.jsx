@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Group = ({ group }) => {
   const { theme } = use(AuthContext);
-  const formattedDate = format(parseISO(group.startDate), "MMMM d, yyyy");
+  const formattedDate = format(parseISO(group.startDate), "MMM d, yyyy");
 
   return (
     <div

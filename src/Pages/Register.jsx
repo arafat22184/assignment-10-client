@@ -82,8 +82,6 @@ const Register = () => {
   const inputBorder = theme === "light" ? "border-gray-300" : "border-gray-700";
   const textColor = theme === "light" ? "text-gray-900" : "text-white";
   const labelColor = theme === "light" ? "text-gray-700" : "text-gray-300";
-  const boxBg =
-    theme === "light" ? "bg-white border border-gray-200" : "bg-gray-900";
   const buttonBg =
     theme === "light"
       ? "bg-indigo-600 hover:bg-indigo-700"
@@ -91,7 +89,7 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center px-4 my-8">
-      <div className={`w-full max-w-md p-8 rounded-xl shadow-lg ${boxBg}`}>
+      <div className={`w-full max-w-md p-8 rounded-xl shadow-lg `}>
         <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>
           Register for HobbyHub
         </h2>

@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
   const [location, setLocation] = useState("");
 
   // Theme
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
   useEffect(() => {
     const localTheme = localStorage.getItem("theme");
     if (localTheme) {
