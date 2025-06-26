@@ -37,7 +37,7 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <div className="drawer-side z-40">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <aside className="menu bg-[#605dff] w-52 min-h-full p-4 space-y-4 text-base-content">
+        <aside className="menu bg-indigo-600 w-52 min-h-full p-4 space-y-4 text-base-content">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 mb-4">
             <img
@@ -45,15 +45,47 @@ const DashboardLayout = () => {
               alt="Logo"
               className="w-10 lg:w-12"
             />
-            <span className="text-lg lg:text-xl font-bold">HobbyHub</span>
+            <span className="text-lg lg:text-xl font-bold text-white">
+              HobbyHub
+            </span>
           </Link>
 
           {/* Nav Links */}
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+                  isActive ? "bg-base-100" : ""
+                }`
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/myGroups">My Groups</NavLink>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                  isActive ? "bg-indigo-500 " : ""
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/myGroups"
+              className={({ isActive }) =>
+                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                  isActive ? "bg-indigo-500 " : ""
+                }`
+              }
+            >
+              My Groups
+            </NavLink>
           </li>
         </aside>
       </div>

@@ -14,6 +14,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import AboutUs from "../Pages/AboutUs";
 import ContactUs from "../Pages/ContactUs";
 import DashBoardLayout from "../Layouts/DashBoardLayout";
+import DashboardHome from "../Pages/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,12 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true,
+        Component: DashboardHome,
+        loader: () => fetch("http://localhost:3000/allGroups"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
       {
         path: "/dashboard/myGroups",
         Component: MyGroups,
