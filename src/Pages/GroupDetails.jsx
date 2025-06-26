@@ -10,6 +10,9 @@ const GroupDetails = () => {
   const group = useLoaderData();
   const [isUpcoming, setIsUpcoming] = useState(true);
   const isAuthor = group.email === user.email;
+  const [isJoined, setIsJoined] = useState(
+    group?.members?.map((member) => member === user.email)[0] || false
+  );
 
   useEffect(() => {
     const today = startOfToday();
@@ -30,6 +33,30 @@ const GroupDetails = () => {
     const groupId = group._id;
     const userEmail = user.email;
     const groupData = { groupId, userEmail };
+
+    if (isJoined) {
+      fetch("http://localhost:3000/joinGroup", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "DELETE",
+        body: JSON.stringify(groupData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deleteRecord.deletedCount) {
+            toast.success("You have successfully left the group.");
+            setIsJoined(false);
+          }
+        })
+        .catch((error) => {
+          if (error) {
+            toast.error("Something went wrong");
+          }
+        });
+      return;
+    }
+
     fetch("http://localhost:3000/joinGroup", {
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +66,10 @@ const GroupDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data?.joinRecord?.insertedId) {
+          toast.success("Group Joined Successfully");
+          setIsJoined(true);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -121,11 +151,17 @@ const GroupDetails = () => {
           onClick={handleJoinGroup}
           className={`w-full py-2 rounded-md text-white font-semibold transition duration-300 cursor-pointer ${
             isUpcoming
-              ? "bg-green-600 hover:bg-green-700"
+              ? isJoined
+                ? "bg-red-500"
+                : "bg-green-600 hover:bg-green-700"
               : "bg-gray-500 cursor-not-allowed"
           }`}
         >
-          {isUpcoming ? "Join Group" : "Group is no longer Active"}
+          {isUpcoming
+            ? isJoined
+              ? "Leave Group"
+              : "Join Group"
+            : "Group is no longer Active"}
         </button>
       </div>
     </div>
