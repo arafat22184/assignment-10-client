@@ -1,6 +1,12 @@
 import { use } from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
+import {
+  FaHome,
+  FaTachometerAlt,
+  FaLayerGroup,
+  FaPlusCircle,
+} from "react-icons/fa";
 
 const DashboardLayout = () => {
   const { user } = use(AuthContext);
@@ -55,12 +61,14 @@ const DashboardLayout = () => {
 
           <div className="flex flex-col items-center gap-3 text-center">
             <img
-              className="rounded-full border-4 w-24"
+              className="rounded-full border-4 border-white w-24"
               src={user?.photoURL}
               alt="User Photo"
             />
             <div>
-              <p className="text-2xl font-bold">{user?.displayName}</p>
+              <p className="text-2xl font-bold text-white">
+                {user?.displayName}
+              </p>
               <p className="text-sm text-slate-300">{user?.email}</p>
             </div>
           </div>
@@ -70,12 +78,12 @@ const DashboardLayout = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+                `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold flex items-center gap-2 ${
                   isActive ? "bg-base-100" : ""
                 }`
               }
             >
-              Home
+              <FaHome /> Home
             </NavLink>
           </li>
           <li>
@@ -83,48 +91,36 @@ const DashboardLayout = () => {
               end
               to="/dashboard"
               className={({ isActive }) =>
-                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                `hover:bg-blue-950 px-2 py-1 rounded font-semibold text-white flex items-center gap-2 ${
                   isActive ? "bg-indigo-500 " : ""
                 }`
               }
             >
-              Dashboard
+              <FaTachometerAlt /> Dashboard
             </NavLink>
           </li>
           <li>
             <NavLink
               to="myGroups"
               className={({ isActive }) =>
-                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                `hover:bg-blue-950 px-2 py-1 rounded font-semibold text-white flex items-center gap-2 ${
                   isActive ? "bg-indigo-500 " : ""
                 }`
               }
             >
-              My Groups
+              <FaLayerGroup /> My Groups
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/dashboard/createGroup"
               className={({ isActive }) =>
-                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                `hover:bg-blue-950 px-2 py-1 rounded font-semibold text-white flex items-center gap-2 ${
                   isActive ? "bg-indigo-500 " : ""
                 }`
               }
             >
-              Create Group
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/updateProfile"
-              className={({ isActive }) =>
-                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
-                  isActive ? "bg-indigo-500 " : ""
-                }`
-              }
-            >
-              Update Profile
+              <FaPlusCircle /> Create Group
             </NavLink>
           </li>
         </aside>

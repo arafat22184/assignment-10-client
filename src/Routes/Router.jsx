@@ -96,10 +96,6 @@ const router = createBrowserRouter([
           fetch(`http://localhost:3000/allGroups/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
-      {
-        path: "/dashboard/updateProfile",
-        Component: UpdateProfile,
-      },
     ],
   },
 ]);
