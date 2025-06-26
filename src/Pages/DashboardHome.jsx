@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaPlusCircle, FaLayerGroup, FaUsers, FaClock } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router";
@@ -20,6 +20,17 @@ const DashboardHome = () => {
   const initialGroups = useLoaderData();
   const { user, theme } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+  const [joinedGroups, setJoinedGroups] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:3000/joinedGroups?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setJoinedGroups(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [user.email]);
 
   // Calculate number of distinct hobby categories
   const uniqueCategories = new Set(initialGroups.map((g) => g.hobbyCategory))
@@ -33,7 +44,6 @@ const DashboardHome = () => {
     return daysUntilStart >= 0;
   });
 
-  console.log(upcomingGroups);
   const upcomingGroupsCount = upcomingGroups.length;
 
   // Data for chart
@@ -41,7 +51,7 @@ const DashboardHome = () => {
     {
       name: "Groups",
       Created: initialGroups.length,
-      Joined: 12, // placeholder, change if you have real data
+      Joined: Array.isArray(joinedGroups) ? joinedGroups.length : 0,
       Categories: uniqueCategories,
       Upcoming: upcomingGroupsCount,
     },
@@ -195,7 +205,7 @@ const DashboardHome = () => {
       </div>
       {/* Upcomming Groups */}
       <div
-        className={`mt-10 py-10 px-3 xl:px-6 rounded-xl ${
+        className={`mt-6 py-10 px-3 xl:px-6 rounded-xl ${
           theme === "light"
             ? "bg-white text-gray-900 border border-gray-200"
             : "bg-gray-900 text-white"

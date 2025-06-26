@@ -3,11 +3,13 @@ import { useLoaderData } from "react-router";
 import { format, isAfter, isEqual, parseISO, startOfToday } from "date-fns";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaUserFriends, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const GroupDetails = () => {
-  const { theme } = useContext(AuthContext);
+  const { theme, user } = useContext(AuthContext);
   const group = useLoaderData();
   const [isUpcoming, setIsUpcoming] = useState(true);
+  const isAuthor = group.email === user.email;
 
   useEffect(() => {
     const today = startOfToday();
@@ -19,6 +21,30 @@ const GroupDetails = () => {
   const formattedDate = group?.startDate
     ? format(parseISO(group.startDate), "MMMM d, yyyy")
     : "N/A";
+
+  const handleJoinGroup = () => {
+    if (isAuthor) {
+      toast.error("Oops! You can't join a group you created.");
+      return;
+    }
+    const groupId = group._id;
+    const userEmail = user.email;
+    const groupData = { groupId, userEmail };
+    fetch("http://localhost:3000/joinGroup", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(groupData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div
@@ -92,7 +118,8 @@ const GroupDetails = () => {
         {/* Status Button */}
         <button
           disabled={!isUpcoming}
-          className={`w-full py-2 rounded-md text-white font-semibold transition duration-300 ${
+          onClick={handleJoinGroup}
+          className={`w-full py-2 rounded-md text-white font-semibold transition duration-300 cursor-pointer ${
             isUpcoming
               ? "bg-green-600 hover:bg-green-700"
               : "bg-gray-500 cursor-not-allowed"
