@@ -1,6 +1,17 @@
 import { useContext } from "react";
-import { FaFacebookF, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaFacebookF,
+  FaGithub,
+  FaHome,
+  FaInfoCircle,
+  FaLinkedinIn,
+  FaTachometerAlt,
+  FaTwitter,
+  FaUsers,
+} from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
+import { Link } from "react-router";
 
 const Footer = () => {
   const { theme } = useContext(AuthContext);
@@ -47,24 +58,41 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className={`space-y-2 text-sm ${mutedText}`}>
             <li>
-              <a href="/" className={hoverColor}>
-                Home
-              </a>
+              <Link to="/" className={`flex items-center gap-2 ${hoverColor}`}>
+                <FaHome /> Home
+              </Link>
             </li>
             <li>
-              <a href="/groups" className={hoverColor}>
-                All Groups
-              </a>
+              <Link
+                to="/groups"
+                className={`flex items-center gap-2 ${hoverColor}`}
+              >
+                <FaUsers /> All Groups
+              </Link>
             </li>
             <li>
-              <a href="/createGroup" className={hoverColor}>
-                Create Group
-              </a>
+              <Link
+                to="/dashboard"
+                className={`flex items-center gap-2 ${hoverColor}`}
+              >
+                <FaTachometerAlt /> Dashboard
+              </Link>
             </li>
             <li>
-              <a href="/myGroups" className={hoverColor}>
-                My Groups
-              </a>
+              <Link
+                to="/contactUs"
+                className={`flex items-center gap-2 ${hoverColor}`}
+              >
+                <FaEnvelope /> Contact Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className={`flex items-center gap-2 ${hoverColor}`}
+              >
+                <FaInfoCircle /> About
+              </Link>
             </li>
           </ul>
         </div>

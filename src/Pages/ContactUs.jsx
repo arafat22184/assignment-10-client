@@ -4,7 +4,7 @@ import { MdEmail, MdPhone, MdLocationOn, MdSend } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const ContactUs = () => {
-  const { theme } = useContext(AuthContext);
+  const { theme, user } = useContext(AuthContext);
 
   const inputStyle = `w-full px-4 py-2 rounded-md border ${
     theme === "light"
@@ -20,7 +20,8 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Sign out Successfully");
+    toast.success("Thanks for reaching out! We'll get back to you soon.");
+    e.target.reset();
   };
 
   return (
@@ -42,9 +43,11 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="text"
+                  defaultValue={user?.displayName}
                   className={inputStyle}
                   placeholder="John Doe"
-                  required
+                  required={!user}
+                  readOnly={!!user}
                 />
               </div>
 
@@ -54,9 +57,11 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="email"
+                  defaultValue={user?.email}
                   className={inputStyle}
                   placeholder="you@example.com"
-                  required
+                  required={!user}
+                  readOnly={!!user}
                 />
               </div>
 

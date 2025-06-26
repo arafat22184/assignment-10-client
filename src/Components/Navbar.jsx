@@ -4,6 +4,15 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { MdLogout } from "react-icons/md";
 import { Tooltip } from "react-tooltip";
+import {
+  FaEnvelope,
+  FaHome,
+  FaInfoCircle,
+  FaSignInAlt,
+  FaTachometerAlt,
+  FaUserPlus,
+  FaUsers,
+} from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut, setTheme } = useContext(AuthContext);
@@ -36,58 +45,62 @@ const Navbar = () => {
         onClick={() => setIsMenuOpen(false)}
         to="/"
         className={({ isActive }) =>
-          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold flex items-center gap-2 ${
             isActive ? "border-b-4 border-white" : ""
           }`
         }
       >
-        Home
+        <FaHome /> Home
       </NavLink>
+
       <NavLink
         onClick={() => setIsMenuOpen(false)}
         to="/groups"
         className={({ isActive }) =>
-          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold flex items-center gap-2 ${
             isActive ? "border-b-4 border-white" : ""
           }`
         }
       >
-        All Groups
+        <FaUsers /> All Groups
       </NavLink>
+
       {user && (
         <NavLink
           onClick={() => setIsMenuOpen(false)}
           to="/dashboard"
           className={({ isActive }) =>
-            `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+            `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold flex items-center gap-2 ${
               isActive ? "border-b-4 border-white" : ""
             }`
           }
         >
-          Dashboard
+          <FaTachometerAlt /> Dashboard
         </NavLink>
       )}
+
       <NavLink
         onClick={() => setIsMenuOpen(false)}
         to="/contactUs"
         className={({ isActive }) =>
-          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold flex items-center gap-2 ${
             isActive ? "border-b-4 border-white" : ""
           }`
         }
       >
-        Contact Us
+        <FaEnvelope /> Contact Us
       </NavLink>
+
       <NavLink
         onClick={() => setIsMenuOpen(false)}
         to="/about"
         className={({ isActive }) =>
-          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold flex items-center gap-2 ${
             isActive ? "border-b-4 border-white" : ""
           }`
         }
       >
-        About
+        <FaInfoCircle /> About
       </NavLink>
     </>
   );
@@ -98,23 +111,24 @@ const Navbar = () => {
         onClick={() => setIsMenuOpen(false)}
         to="/login"
         className={({ isActive }) =>
-          `py-2 px-5 font-semibold rounded hover:bg-blue-950 hover:text-white border border-white ${
+          `py-2 px-5 font-semibold rounded hover:bg-blue-950 hover:text-white border border-white flex items-center gap-2 justify-center ${
             isActive ? "bg-white text-indigo-600" : "bg-indigo-600 text-white"
           }`
         }
       >
-        Login
+        <FaSignInAlt /> Login
       </NavLink>
+
       <NavLink
         onClick={() => setIsMenuOpen(false)}
         to="/register"
         className={({ isActive }) =>
-          `py-2 px-5 font-semibold rounded hover:bg-blue-950 hover:text-white border border-white ${
+          `py-2 px-5 font-semibold rounded hover:bg-blue-950 hover:text-white border border-white flex items-center gap-2 justify-center ${
             isActive ? "bg-white text-indigo-600" : "bg-indigo-600 text-white"
           }`
         }
       >
-        Register
+        <FaUserPlus /> Register
       </NavLink>
     </>
   );
