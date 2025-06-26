@@ -15,6 +15,7 @@ import AboutUs from "../Pages/AboutUs";
 import ContactUs from "../Pages/ContactUs";
 import DashBoardLayout from "../Layouts/DashBoardLayout";
 import DashboardHome from "../Pages/DashboardHome";
+import UpdateProfile from "../Pages/UpdateProfile";
 
 const router = createBrowserRouter([
   {
@@ -34,15 +35,6 @@ const router = createBrowserRouter([
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
-        path: "/createGroup",
-        element: (
-          <PrivateRoute>
-            <CreateGroup></CreateGroup>
-          </PrivateRoute>
-        ),
-      },
-
-      {
         path: "/groups/:id",
         element: (
           <PrivateRoute>
@@ -53,17 +45,7 @@ const router = createBrowserRouter([
           fetch(`http://localhost:3000/allGroups/${params.id}`),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
-      {
-        path: "/updateGroup/:id",
-        element: (
-          <PrivateRoute>
-            <UpdateGroup></UpdateGroup>
-          </PrivateRoute>
-        ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:3000/allGroups/${params.id}`),
-        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
-      },
+
       {
         path: "/about",
         Component: AboutUs,
@@ -102,6 +84,21 @@ const router = createBrowserRouter([
         Component: MyGroups,
         loader: () => fetch("http://localhost:3000/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
+      {
+        path: "/dashboard/createGroup",
+        Component: CreateGroup,
+      },
+      {
+        path: "/dashboard/updateGroup/:id",
+        Component: UpdateGroup,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/allGroups/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
+      {
+        path: "/dashboard/updateProfile",
+        Component: UpdateProfile,
       },
     ],
   },

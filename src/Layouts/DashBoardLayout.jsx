@@ -1,6 +1,9 @@
+import { use } from "react";
 import { Link, NavLink, Outlet } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const DashboardLayout = () => {
+  const { user } = use(AuthContext);
   return (
     <div className="drawer drawer-mobile lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -50,6 +53,18 @@ const DashboardLayout = () => {
             </span>
           </Link>
 
+          <div className="flex flex-col items-center gap-3 text-center">
+            <img
+              className="rounded-full border-4 w-24"
+              src={user?.photoURL}
+              alt="User Photo"
+            />
+            <div>
+              <p className="text-2xl font-bold">{user?.displayName}</p>
+              <p className="text-sm text-slate-300">{user?.email}</p>
+            </div>
+          </div>
+
           {/* Nav Links */}
           <li>
             <NavLink
@@ -65,6 +80,7 @@ const DashboardLayout = () => {
           </li>
           <li>
             <NavLink
+              end
               to="/dashboard"
               className={({ isActive }) =>
                 `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
@@ -77,7 +93,7 @@ const DashboardLayout = () => {
           </li>
           <li>
             <NavLink
-              to="/dashboard/myGroups"
+              to="myGroups"
               className={({ isActive }) =>
                 `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
                   isActive ? "bg-indigo-500 " : ""
@@ -85,6 +101,30 @@ const DashboardLayout = () => {
               }
             >
               My Groups
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/createGroup"
+              className={({ isActive }) =>
+                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                  isActive ? "bg-indigo-500 " : ""
+                }`
+              }
+            >
+              Create Group
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/updateProfile"
+              className={({ isActive }) =>
+                `hover:bg-blue-950  px-2 py-1 rounded font-semibold text-white  ${
+                  isActive ? "bg-indigo-500 " : ""
+                }`
+              }
+            >
+              Update Profile
             </NavLink>
           </li>
         </aside>

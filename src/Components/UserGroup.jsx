@@ -4,7 +4,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const UserGroup = ({ group, i, setallGroups, allGroups }) => {
+const UserGroup = ({ group, setallGroups, allGroups }) => {
   const {
     _id,
     groupName,
@@ -59,7 +59,7 @@ const UserGroup = ({ group, i, setallGroups, allGroups }) => {
         <td className="p-3">{format(parseISO(startDate), "yyyy-MMM-dd")}</td>
         <td className="p-3">{meetingLocation}</td>
         <td className="p-3 text-center flex justify-center items-center gap-2">
-          <Link to={`/updateGroup/${_id}`}>
+          <Link to={`/dashboard/updateGroup/${_id}`}>
             <button className="inline-flex items-center gap-2 bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded-md transition duration-300 cursor-pointer">
               <FaEdit />
               Update

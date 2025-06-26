@@ -1,12 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import {
-  FaPlusCircle,
-  FaLayerGroup,
-  FaUsers,
-  FaPalette,
-  FaClock,
-} from "react-icons/fa";
+import { FaPlusCircle, FaLayerGroup, FaUsers, FaClock } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router";
 import {
   BarChart,
@@ -19,16 +13,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { differenceInDays, parseISO } from "date-fns";
+import UpdateProfile from "./UpdateProfile";
 
 const DashboardHome = () => {
   const initialGroups = useLoaderData();
   const { user, theme } = useContext(AuthContext);
-
-  // Calculate total max members capacity (sum of maxMembers)
-  const totalMaxMembers = initialGroups.reduce(
-    (acc, group) => acc + Number(group.maxMembers || 0),
-    0
-  );
+  const [showModal, setShowModal] = useState(false);
 
   // Calculate number of distinct hobby categories
   const uniqueCategories = new Set(initialGroups.map((g) => g.hobbyCategory))
@@ -81,75 +71,120 @@ const DashboardHome = () => {
   };
 
   return (
-    <div
-      className={`px-4 sm:px-6 lg:px-8 py-10 max-w-7xl mx-auto ${bg} rounded-xl shadow-md`}
-    >
-      <h2 className={`text-2xl sm:text-3xl font-bold mb-6 text-center ${text}`}>
-        Welcome back,{" "}
-        <span className="text-primary">{user?.displayName || "Hobbyist"}!</span>
-      </h2>
+    <div className="flex flex-col xl:flex-row gap-4">
+      {/* USER INFO */}
+      <div
+        className={`px-4 sm:px-6 lg:px-8 py-10 max-w-7xl mx-auto ${bg} rounded-xl shadow-md bg-cover xl:py-20 bg-no-repeat w-full flex flex-col items-center gap-6`}
+        style={{
+          backgroundImage: `url('https://i.ibb.co/840Mr2FT/userBg.jpg')`,
+        }}
+      >
+        <img
+          className="w-32 rounded-full border-4 shadow-lg"
+          src={user?.photoURL}
+          alt="User Avatar"
+        />
 
-      <div style={{ width: "100%", height: 400 }}>
-        <ResponsiveContainer>
-          <BarChart
-            data={data}
-            margin={{ top: 20, right: 40, left: 20, bottom: 20 }}
-            barCategoryGap="15%"
-            barGap={6}
+        <div className="text-center space-y-4">
+          <h2 className={`text-2xl sm:text-3xl font-bold ${text}`}>
+            Welcome back,{" "}
+            <span className="text-primary">
+              {user?.displayName || "Hobbyist"}!
+            </span>
+          </h2>
+
+          <p className={`text-sm sm:text-base ${text}`}>
+            <FaUsers className="inline mr-1 text-primary" />
+            Email: <span className="font-medium">{user?.email || "N/A"}</span>
+          </p>
+
+          <p className={`text-sm sm:text-base ${text}`}>
+            <FaClock className="inline mr-1 text-primary" />
+            Active Groups:{" "}
+            <span className="font-semibold">{initialGroups.length}</span> |
+            Unique Categories:{" "}
+            <span className="font-semibold">{uniqueCategories}</span> | Upcoming
+            Events: <span className="font-semibold">{upcomingGroupsCount}</span>
+          </p>
+          <button
+            className="btn btn-primary"
+            onClick={() => setShowModal(true)}
           >
-            <CartesianGrid
-              stroke={theme === "light" ? "#e5e7eb" : "#374151"}
-              strokeDasharray="3 3"
-            />
-            <XAxis
-              dataKey="name"
-              tick={{ fill: text.replace("text-", "") }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <YAxis
-              allowDecimals={false}
-              tick={{ fill: text.replace("text-", "") }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend verticalAlign="top" height={36} />
-            <Bar
-              dataKey="Created"
-              fill={colors.Created}
-              radius={[10, 10, 0, 0]}
-              animationDuration={1000}
-            />
-            <Bar
-              dataKey="Joined"
-              fill={colors.Joined}
-              radius={[10, 10, 0, 0]}
-              animationDuration={1000}
-            />
-            <Bar
-              dataKey="Categories"
-              fill={colors.Categories}
-              radius={[10, 10, 0, 0]}
-              animationDuration={1000}
-            />
-            <Bar
-              dataKey="Upcoming"
-              fill={colors.Upcoming}
-              radius={[10, 10, 0, 0]}
-              animationDuration={1000}
-            />
-          </BarChart>
-        </ResponsiveContainer>
+            Update Profile
+          </button>
+        </div>
       </div>
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+          <UpdateProfile setShowModal={setShowModal} />
+        </div>
+      )}
 
-      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
-        <Link to="/create-group" className="btn btn-primary gap-2">
-          <FaPlusCircle /> Create New Group
-        </Link>
-        <Link to="/dashboard/myGroups" className="btn btn-outline gap-2">
-          <FaLayerGroup /> View My Groups
-        </Link>
+      <div
+        className={`px-4 sm:px-6 lg:px-8 py-10 max-w-7xl mx-auto ${bg} rounded-xl shadow-md w-full`}
+      >
+        <div style={{ width: "100%", height: 400 }}>
+          <ResponsiveContainer>
+            <BarChart
+              data={data}
+              margin={{ top: 20, right: 40, left: 20, bottom: 20 }}
+              barCategoryGap="15%"
+              barGap={6}
+            >
+              <CartesianGrid
+                stroke={theme === "light" ? "#e5e7eb" : "#374151"}
+                strokeDasharray="3 3"
+              />
+              <XAxis
+                dataKey="name"
+                tick={{ fill: text.replace("text-", "") }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                allowDecimals={false}
+                tick={{ fill: text.replace("text-", "") }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend verticalAlign="top" height={36} />
+              <Bar
+                dataKey="Created"
+                fill={colors.Created}
+                radius={[10, 10, 0, 0]}
+                animationDuration={1000}
+              />
+              <Bar
+                dataKey="Joined"
+                fill={colors.Joined}
+                radius={[10, 10, 0, 0]}
+                animationDuration={1000}
+              />
+              <Bar
+                dataKey="Categories"
+                fill={colors.Categories}
+                radius={[10, 10, 0, 0]}
+                animationDuration={1000}
+              />
+              <Bar
+                dataKey="Upcoming"
+                fill={colors.Upcoming}
+                radius={[10, 10, 0, 0]}
+                animationDuration={1000}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link to="/dashboard/createGroup" className="btn btn-primary gap-2">
+            <FaPlusCircle /> Create New Group
+          </Link>
+          <Link to="/dashboard/myGroups" className="btn btn-outline gap-2">
+            <FaLayerGroup /> View My Groups
+          </Link>
+        </div>
       </div>
     </div>
   );
