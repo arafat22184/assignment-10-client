@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import UserGroup from "./UserGroup";
 import { AuthContext } from "../Provider/AuthProvider";
 import {
@@ -13,20 +13,18 @@ import {
 const UserGroups = ({ allGroups, setallGroups }) => {
   const { theme } = useContext(AuthContext);
 
-  const tableHeadStyle = `p-3 text-sm font-semibold ${
+  const tableHeadStyle = `p-3 text-xs sm:text-sm font-semibold ${
     theme === "light" ? "bg-gray-200 text-gray-800" : "bg-gray-700 text-white"
   }`;
+
   const tableBodyStyle =
     theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white";
 
   return (
-    <div className="overflow-x-auto">
-      <table className="lg:min-w-full min-w-6xl text-left border-collapse text-sm">
+    <div className="overflow-x-auto w-full">
+      <table className="min-w-[1100px] w-full text-left border-collapse text-sm">
         <thead>
           <tr>
-            <th className={tableHeadStyle}>
-              <FaListUl className="inline-block mr-1" /> Sl.
-            </th>
             <th className={tableHeadStyle}>
               <FaLayerGroup className="inline-block mr-1" /> Group Name
             </th>

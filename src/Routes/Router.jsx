@@ -13,6 +13,7 @@ import UpdateGroup from "../Pages/UpdateGroup";
 import ErrorPage from "../Pages/ErrorPage";
 import AboutUs from "../Pages/AboutUs";
 import ContactUs from "../Pages/ContactUs";
+import DashBoardLayout from "../Layouts/DashBoardLayout";
 
 const router = createBrowserRouter([
   {
@@ -39,16 +40,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/myGroups",
-        element: (
-          <PrivateRoute>
-            <MyGroups></MyGroups>
-          </PrivateRoute>
-        ),
-        loader: () => fetch("http://localhost:3000/allGroups"),
-        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
-      },
+
       {
         path: "/groups/:id",
         element: (
@@ -89,6 +81,22 @@ const router = createBrowserRouter([
       },
     ],
     errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout></DashBoardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard/myGroups",
+        Component: MyGroups,
+        loader: () => fetch("http://localhost:3000/allGroups"),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
+    ],
   },
 ]);
 

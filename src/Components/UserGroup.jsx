@@ -1,3 +1,4 @@
+import { format, parseISO } from "date-fns";
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router";
@@ -47,14 +48,15 @@ const UserGroup = ({ group, i, setallGroups, allGroups }) => {
     });
   };
 
+  console.log(startDate);
+
   return (
     <>
       <tr key={_id} className="border-b border-gray-700">
-        <td className="p-3">{i + 1}.</td>
         <td className="p-3">{groupName}</td>
         <td className="p-3">{hobbyCategory}</td>
-        <td className="p-3">{maxMembers}</td>
-        <td className="p-3">{startDate}</td>
+        <td className="p-3 text-center">{maxMembers}</td>
+        <td className="p-3">{format(parseISO(startDate), "yyyy-MMM-dd")}</td>
         <td className="p-3">{meetingLocation}</td>
         <td className="p-3 text-center flex justify-center items-center gap-2">
           <Link to={`/updateGroup/${_id}`}>

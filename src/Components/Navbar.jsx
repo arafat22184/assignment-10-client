@@ -56,6 +56,17 @@ const Navbar = () => {
       </NavLink>
       <NavLink
         onClick={() => setIsMenuOpen(false)}
+        to="/dashboard"
+        className={({ isActive }) =>
+          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+            isActive ? "border-b-4 border-white" : ""
+          }`
+        }
+      >
+        Dashboard
+      </NavLink>
+      <NavLink
+        onClick={() => setIsMenuOpen(false)}
         to="/contactUs"
         className={({ isActive }) =>
           `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
