@@ -1,122 +1,105 @@
-import React, { useEffect, useState, use } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { format, isAfter, isEqual, parseISO, startOfToday } from "date-fns";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaUserFriends, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const GroupDetails = () => {
-  const { theme } = use(AuthContext);
+  const { theme } = useContext(AuthContext);
   const group = useLoaderData();
-  const [status, setStatus] = useState(true);
+  const [isUpcoming, setIsUpcoming] = useState(true);
 
   useEffect(() => {
     const today = startOfToday();
-    const groupDate = parseISO(group.startDate);
-    const isUpcoming = isAfter(groupDate, today) || isEqual(groupDate, today);
-    setStatus(isUpcoming);
+    const groupDate = parseISO(group?.startDate);
+    const valid = isAfter(groupDate, today) || isEqual(groupDate, today);
+    setIsUpcoming(valid);
   }, [group]);
 
-  const formattedDate = format(parseISO(group.startDate), "MMMM d, yyyy");
+  const formattedDate = group?.startDate
+    ? format(parseISO(group.startDate), "MMMM d, yyyy")
+    : "N/A";
 
   return (
     <div
-      className={`my-5 max-w-2xl mx-auto rounded-xl border transition-colors duration-300 ${
+      className={`my-10 max-w-3xl mx-auto rounded-xl overflow-hidden border shadow transition-colors duration-300 ${
         theme === "light"
-          ? "bg-white border-gray-200"
-          : "bg-gray-800 border-gray-700"
+          ? "bg-white border-gray-200 text-gray-900"
+          : "bg-gray-800 border-gray-700 text-white"
       }`}
     >
-      {/* Image */}
+      {/* Group Banner Image */}
       <img
-        src={group.imageUrl}
-        alt={group.groupName}
-        className="h-64 w-full object-cover rounded-t-xl"
+        src={group?.imageUrl || "https://via.placeholder.com/600x300"}
+        alt={group?.groupName || "Group Image"}
+        className="w-full h-64 object-cover"
       />
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
-        {/* Group Name */}
-        <h2
-          className={`text-2xl font-bold mb-2 ${
-            theme === "light" ? "text-gray-900" : "text-white"
-          }`}
-        >
-          {group.groupName}
-        </h2>
+      {/* Group Content */}
+      <div className="p-6 space-y-4">
+        {/* Group Title */}
+        <h2 className="text-3xl font-bold">{group?.groupName}</h2>
 
-        {/* Author Details */}
-        <div className="flex items-center gap-3 p-2">
+        {/* Author Info */}
+        <div className="flex items-center gap-4">
           <img
-            className="w-10 h-10 rounded-full border-2 border-blue-500 object-cover"
-            src={group.userPhotoURL}
-            alt={group.name}
+            src={group?.userPhotoURL || "https://i.pravatar.cc/40"}
+            alt={group?.name}
+            className="w-12 h-12 rounded-full object-cover border-2 border-blue-500"
           />
           <div>
-            <p className="text-sm">Author</p>
-            <h4
-              className={`text-base font-semibold ${
-                theme === "light" ? "text-gray-800" : "text-white"
-              }`}
-            >
-              {group.name}
-            </h4>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Author</p>
+            <h4 className="font-semibold text-base">{group?.name}</h4>
           </div>
         </div>
 
-        {/* Hobby Category */}
+        {/* Category Tag */}
         <p
-          className={`text-sm font-medium mb-1 ${
-            theme === "light" ? "text-indigo-600" : "text-indigo-400"
+          className={`inline-block text-sm font-medium px-3 py-1 rounded-full ${
+            theme === "light"
+              ? "bg-indigo-100 text-indigo-700"
+              : "bg-indigo-600/20 text-indigo-300"
           }`}
         >
-          {group.hobbyCategory}
+          {group?.hobbyCategory || "Uncategorized"}
         </p>
 
         {/* Description */}
-        <p
-          className={`mb-4 flex-grow ${
-            theme === "light" ? "text-gray-700" : "text-gray-300"
-          }`}
-        >
-          {group.description}
+        <p className="leading-relaxed">
+          {group?.description || "No description provided."}
         </p>
 
         {/* Meeting Location */}
-        <p
-          className={`text-sm mb-1 flex items-center gap-1 ${
-            theme === "light" ? "text-gray-600" : "text-gray-400"
-          }`}
-        >
-          <FaMapMarkerAlt className="text-red-500" />
-          {group.meetingLocation}
-        </p>
+        {group?.meetingLocation && (
+          <p className="flex items-center gap-2 text-sm">
+            <FaMapMarkerAlt className="text-red-500" />
+            {group.meetingLocation}
+          </p>
+        )}
 
-        {/* Members & Date */}
-        <div
-          className={`flex justify-between items-center text-sm mb-4 ${
-            theme === "light" ? "text-gray-600" : "text-gray-400"
-          }`}
-        >
-          <span className="flex items-center gap-1">
+        {/* Date & Members */}
+        <div className="flex justify-between text-sm items-center">
+          <div className="flex items-center gap-2">
             <FaUserFriends className="text-indigo-500" />
-            {group.maxMembers} Members
-          </span>
-          <span className="flex items-center gap-1">
+            <span>{group?.maxMembers || 0} Members</span>
+          </div>
+          <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-indigo-500" />
-            {formattedDate}
-          </span>
+            <span>{formattedDate}</span>
+          </div>
         </div>
 
         {/* Status Button */}
-        {status ? (
-          <button className="mt-auto inline-block bg-green-600 hover:bg-green-700 text-white text-center px-4 py-2 rounded-md transition duration-300 cursor-pointer">
-            Join Group
-          </button>
-        ) : (
-          <button className="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white text-center px-4 py-2 rounded-md transition duration-300 cursor-pointer">
-            Group is no longer Active
-          </button>
-        )}
+        <button
+          disabled={!isUpcoming}
+          className={`w-full py-2 rounded-md text-white font-semibold transition duration-300 ${
+            isUpcoming
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-gray-500 cursor-not-allowed"
+          }`}
+        >
+          {isUpcoming ? "Join Group" : "Group is no longer Active"}
+        </button>
       </div>
     </div>
   );
