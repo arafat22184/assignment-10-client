@@ -1,12 +1,12 @@
-import React, { use } from "react";
+import { useContext } from "react";
 import { Link } from "react-router";
 import { format, parseISO } from "date-fns";
 import { FaUserFriends, FaCalendarAlt } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Group = ({ group }) => {
-  const { theme } = use(AuthContext);
-  const formattedDate = format(parseISO(group.startDate), "MMM d, yyyy");
+  const { theme } = useContext(AuthContext);
+  const formattedDate = format(parseISO(group.startDate), "dd MMM yyyy");
 
   return (
     <div

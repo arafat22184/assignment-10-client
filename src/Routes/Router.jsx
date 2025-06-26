@@ -16,6 +16,7 @@ import ContactUs from "../Pages/ContactUs";
 import DashBoardLayout from "../Layouts/DashBoardLayout";
 import DashboardHome from "../Pages/DashboardHome";
 import UpdateProfile from "../Pages/UpdateProfile";
+import JoinedGroups from "../Pages/JoinedGroups";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,13 @@ const router = createBrowserRouter([
         Component: UpdateGroup,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/allGroups/${params.id}`),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
+      },
+      {
+        path: "joinedGroups/:email",
+        Component: JoinedGroups,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/joinedGroups?email=${params.email}`),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
     ],

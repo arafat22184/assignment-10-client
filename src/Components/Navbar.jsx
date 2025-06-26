@@ -54,17 +54,19 @@ const Navbar = () => {
       >
         All Groups
       </NavLink>
-      <NavLink
-        onClick={() => setIsMenuOpen(false)}
-        to="/dashboard"
-        className={({ isActive }) =>
-          `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
-            isActive ? "border-b-4 border-white" : ""
-          }`
-        }
-      >
-        Dashboard
-      </NavLink>
+      {user && (
+        <NavLink
+          onClick={() => setIsMenuOpen(false)}
+          to="/dashboard"
+          className={({ isActive }) =>
+            `hover:bg-blue-950 text-white px-2 py-1 rounded font-semibold  ${
+              isActive ? "border-b-4 border-white" : ""
+            }`
+          }
+        >
+          Dashboard
+        </NavLink>
+      )}
       <NavLink
         onClick={() => setIsMenuOpen(false)}
         to="/contactUs"
@@ -132,7 +134,7 @@ const Navbar = () => {
       />
       <button
         onClick={handleSignOut}
-        className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 cursor-pointer"
+        className="flex items-center justify-center gap-2 bg-red-400 text-black px-4 py-2 rounded hover:text-white hover:bg-red-500 cursor-pointer"
       >
         Logout <MdLogout size={20} />
       </button>
@@ -140,7 +142,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="w-full shadow bg-[#605dff]">
+    <nav className="w-full shadow bg-indigo-600">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">

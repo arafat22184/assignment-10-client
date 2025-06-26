@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import UserGroups from "../Components/UserGroups";
 
@@ -20,9 +20,14 @@ const MyGroups = () => {
       </h2>
 
       {allGroups.length === 0 ? (
-        <p className="text-center text-lg sm:text-2xl text-gray-400">
-          You haven’t created any groups yet.
-        </p>
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-center text-lg sm:text-2xl text-gray-400">
+            You haven’t created any groups yet.
+          </p>
+          <Link to={"/dashboard/createGroup"} className="btn bg-indigo-600">
+            Create Group
+          </Link>
+        </div>
       ) : (
         <UserGroups allGroups={allGroups} setallGroups={setAllGroups} />
       )}

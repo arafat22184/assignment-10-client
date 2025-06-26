@@ -6,10 +6,22 @@ import {
   FaTachometerAlt,
   FaLayerGroup,
   FaPlusCircle,
+  FaUserCheck,
 } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const DashboardLayout = () => {
-  const { user } = use(AuthContext);
+  const { user, logOut } = use(AuthContext);
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Sign out Successfully");
+      })
+      .catch(() => {
+        toast.error("Oops! Something went wrong.");
+      });
+  };
   return (
     <div className="drawer drawer-mobile lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -113,6 +125,18 @@ const DashboardLayout = () => {
           </li>
           <li>
             <NavLink
+              to={`joinedGroups/${user.email}`}
+              className={({ isActive }) =>
+                `hover:bg-blue-950 px-2 py-1 rounded font-semibold text-white flex items-center gap-2 ${
+                  isActive ? "bg-indigo-500 " : ""
+                }`
+              }
+            >
+              <FaUserCheck /> Joined Groups
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/dashboard/createGroup"
               className={({ isActive }) =>
                 `hover:bg-blue-950 px-2 py-1 rounded font-semibold text-white flex items-center gap-2 ${
@@ -123,6 +147,13 @@ const DashboardLayout = () => {
               <FaPlusCircle /> Create Group
             </NavLink>
           </li>
+
+          <button
+            onClick={handleSignOut}
+            className="flex items-center justify-center gap-2 bg-red-400 text-black py-2 rounded hover:text-white hover:bg-red-500 cursor-pointer"
+          >
+            Logout <MdLogout size={20} />
+          </button>
         </aside>
       </div>
     </div>
