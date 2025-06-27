@@ -26,13 +26,15 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/sixGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/sixGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/groups",
         Component: AllGroups,
-        loader: () => fetch("http://localhost:3000/allGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
@@ -43,7 +45,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/allGroups/${params.id}`),
+          fetch(
+            `https://assignment-10-server-lac-sigma.vercel.app/allGroups/${params.id}`
+          ),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
 
@@ -77,13 +81,15 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: DashboardHome,
-        loader: () => fetch("http://localhost:3000/allGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/dashboard/myGroups",
         Component: MyGroups,
-        loader: () => fetch("http://localhost:3000/allGroups"),
+        loader: () =>
+          fetch("https://assignment-10-server-lac-sigma.vercel.app/allGroups"),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
@@ -94,14 +100,18 @@ const router = createBrowserRouter([
         path: "/dashboard/updateGroup/:id",
         Component: UpdateGroup,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/allGroups/${params.id}`),
+          fetch(
+            `https://assignment-10-server-lac-sigma.vercel.app/allGroups/${params.id}`
+          ),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "joinedGroups/:email",
         Component: JoinedGroups,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/joinedGroups?email=${params.email}`),
+          fetch(
+            `https://assignment-10-server-lac-sigma.vercel.app/joinedGroups?email=${params.email}`
+          ),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
     ],

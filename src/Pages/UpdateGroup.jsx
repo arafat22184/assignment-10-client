@@ -39,13 +39,16 @@ const UpdateGroup = () => {
     const uid = user.uid;
     const updateGroup = { ...formAllValues, uid };
 
-    fetch(`http://localhost:3000/allGroups/${_id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updateGroup),
-    })
+    fetch(
+      `https://assignment-10-server-lac-sigma.vercel.app/allGroups/${_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updateGroup),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {

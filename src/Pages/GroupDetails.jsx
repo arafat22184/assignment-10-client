@@ -35,7 +35,7 @@ const GroupDetails = () => {
     const groupData = { groupId, userEmail };
 
     if (isJoined) {
-      fetch("http://localhost:3000/joinGroup", {
+      fetch("https://assignment-10-server-lac-sigma.vercel.app/joinGroup", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,7 +57,7 @@ const GroupDetails = () => {
       return;
     }
 
-    fetch("http://localhost:3000/joinGroup", {
+    fetch("https://assignment-10-server-lac-sigma.vercel.app/joinGroup", {
       headers: {
         "Content-Type": "application/json",
       },

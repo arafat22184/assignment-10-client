@@ -55,7 +55,7 @@ const AllGroups = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:3000/allGroups?search=${search}`
+          `https://assignment-10-server-lac-sigma.vercel.app/allGroups?search=${search}`
         );
         const data = await res.json();
         const filtered =

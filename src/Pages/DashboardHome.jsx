@@ -15,7 +15,9 @@ const DashboardHome = () => {
   const [joinedGroups, setJoinedGroups] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/joinedGroups?email=${user.email}`)
+    fetch(
+      `https://assignment-10-server-lac-sigma.vercel.app/joinedGroups?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setJoinedGroups(data))
       .catch((err) => console.error(err));
