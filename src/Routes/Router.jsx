@@ -105,6 +105,7 @@ const router = createBrowserRouter([
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
     ],
+    errorElement: <ErrorPage></ErrorPage>,
   },
 ]);
 

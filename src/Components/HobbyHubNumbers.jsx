@@ -11,7 +11,7 @@ const HobbyHubNumbers = () => {
   return (
     <section
       ref={ref}
-      className={`py-16 mb-12 rounded-2xl px-4 md:px-8 lg:px-16 transition-colors duration-300`}
+      className={`my-16 rounded-2xl px-4 md:px-8 lg:px-16 transition-colors duration-300`}
     >
       <div className="max-w-6xl mx-auto text-center">
         {/* Title */}

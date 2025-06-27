@@ -25,7 +25,7 @@ const ContactUs = () => {
   };
 
   return (
-    <section className={`${sectionBg} py-16 px-4 md:px-8 lg:px-16`}>
+    <section className={`${sectionBg} my-12 px-4 md:px-8 lg:px-16`}>
       <div className="max-w-6xl mx-auto">
         <h2
           className={`text-3xl md:text-4xl font-bold mb-8 text-center  ${headingColor}`}

@@ -113,7 +113,7 @@ const Login = () => {
 
   return (
     <div
-      className={`flex items-stretch justify-center mx-4 md:mx-auto my-16 lg:max-w-4xl max-w-xl border ${contentBox}`}
+      className={`flex items-stretch justify-center mx-4 md:mx-auto my-12 lg:max-w-4xl max-w-xl border ${contentBox}`}
     >
       <div className="flex-1 hidden lg:block">
         <img

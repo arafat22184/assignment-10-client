@@ -12,7 +12,7 @@ const AboutUs = () => {
       : "bg-gray-800 border-gray-700";
 
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-16 mb-12 transition-colors duration-300">
+    <section className="my-12 px-4 md:px-8 lg:px-16 mb-12 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${textColor}`}>

@@ -10,7 +10,7 @@ const Groups = () => {
 
   return (
     <div
-      className={`min-w-full px-4 py-12 my-12 rounded-2xl transition-colors duration-300`}
+      className={`min-w-full px-4 my-16 rounded-2xl transition-colors duration-300`}
     >
       {/* Typewriter Heading */}
       <h1 className={`text-4xl font-bold text-center mb-10`}>

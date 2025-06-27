@@ -78,7 +78,7 @@ const AllGroups = () => {
 
   return (
     <section
-      className={`px-4 py-16 transition-colors duration-300 ${
+      className={`px-4 py-12 transition-colors duration-300 ${
         theme === "light"
           ? "text-gray-900 bg-gray-50"
           : "text-white bg-gray-900"

@@ -6,7 +6,7 @@ const WhyJoin = () => {
 
   return (
     <section
-      className={`py-16 rounded-2xl mb-12 px-4 md:px-8 lg:px-16 transition-colors duration-300`}
+      className={`rounded-2xl px-4 md:px-8 lg:px-16 transition-colors duration-300`}
     >
       <div className="max-w-6xl mx-auto text-center">
         <h2
